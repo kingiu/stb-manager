@@ -225,6 +225,7 @@ tr:hover { background: #fafafa; }
             <button class="tab-btn active" onclick="switchTab('devices', this)">设备管理</button>
             <button class="tab-btn" onclick="switchTab('ota', this)">固件升级</button>
             <button class="tab-btn" onclick="switchTab('shell', this)">远程终端</button>
+            <button class="tab-btn" onclick="switchTab('settings', this)">Agent 配置</button>
         </div>
 
         <!-- Tab: Devices -->
@@ -329,6 +330,84 @@ tr:hover { background: #fafafa; }
                         <h3 style="margin-bottom: 10px; font-size: 14px;">执行结果：</h3>
                         <pre id="shellOutput" style="background: #1a1a2e; color: #0f0; padding: 16px; border-radius: 8px; font-size: 13px; max-height: 400px; overflow-y: auto; white-space: pre-wrap; font-family: monospace;"></pre>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Agent Settings -->
+        <div id="tab-settings" class="tab-panel">
+            <div class="card" style="margin-bottom: 20px;">
+                <div class="card-header"><h2>🔧 Agent 环境变量配置</h2></div>
+                <div style="padding: 20px;">
+                    <p style="color: #888; margin-bottom: 16px; font-size: 14px;">
+                        配置下发到设备 agent 的环境变量，配置后推送到在线设备，agent 重启后生效。
+                    </p>
+                    <div class="form-group">
+                        <label>目标设备</label>
+                        <select id="settingsTarget">
+                            <option value="">-- 选择设备 --</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>MQTT 服务器 (MQTT_BROKER)</label>
+                            <input type="text" id="cfgMqttBroker" placeholder="tcp://192.168.1.100:1883">
+                        </div>
+                        <div class="form-group">
+                            <label>MQTT 用户名 (MQTT_USER)</label>
+                            <input type="text" id="cfgMqttUser" placeholder="admin">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>MQTT 密码 (MQTT_PASS)</label>
+                            <input type="text" id="cfgMqttPass" placeholder="admin@manager">
+                        </div>
+                        <div class="form-group">
+                            <label>心跳间隔 (秒) (MQTT_HEARTBEAT)</label>
+                            <input type="number" id="cfgHeartbeat" value="60" min="10">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>固件下载地址 (OTA_SERVER)</label>
+                        <input type="text" id="cfgOtaServer" placeholder="http://192.168.1.100:8080 或 https://gitee.com/xxx/xxx/raw/main/ota">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>设备序列号 (DEVICE_SERIAL)</label>
+                            <input type="text" id="cfgSerial" placeholder="留空则从设备自动读取">
+                        </div>
+                        <div class="form-group">
+                            <label>A/B 启动槽位 (BOOT_SLOT)</label>
+                            <select id="cfgBootSlot">
+                                <option value="a">a (默认)</option>
+                                <option value="b">b</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="margin-top: 16px; display: flex; gap: 8px;">
+                        <button class="btn btn-success" onclick="pushAgentConfig()">🚀 推送到设备</button>
+                        <button class="btn btn-primary" onclick="applyAllDevices()">📡 推送到全部在线设备</button>
+                        <button class="btn btn-primary" onclick="restartAllAgents()">🔄 全部重启 Agent</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><h2>📋 配置说明</h2></div>
+                <div style="padding: 20px; font-size: 14px; line-height: 1.8;">
+                    <table style="width: 100%;">
+                        <thead>
+                            <tr><th>环境变量</th><th>说明</th><th>示例</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>MQTT_BROKER</code></td><td>MQTT Broker 地址</td><td><code>tcp://192.168.1.100:1883</code></td></tr>
+                            <tr><td><code>MQTT_USER</code> / <code>MQTT_PASS</code></td><td>MQTT 认证</td><td><code>admin</code> / <code>admin@manager</code></td></tr>
+                            <tr><td><code>OTA_SERVER</code></td><td>固件下载服务地址（支持 Gitee/GitHub raw 链接）</td><td><code>https://gitee.com/user/repo/raw/main/ota</code></td></tr>
+                            <tr><td><code>DEVICE_SERIAL</code></td><td>设备序列号（自动检测优先）</td><td><code>STB-2024-001</code></td></tr>
+                            <tr><td><code>BOOT_SLOT</code></td><td>A/B 分区方案</td><td><code>a</code> 或 <code>b</code></td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -451,6 +530,7 @@ async function loadDevices() {
 function updateSelects(devices) {
     const otaTargets = document.getElementById('otaTarget');
     const shellTargets = document.getElementById('shellTarget');
+    const settingsTargets = document.getElementById('settingsTarget');
     const onlineDevices = devices.filter(d => d.online);
 
     // OTA targets
@@ -459,6 +539,10 @@ function updateSelects(devices) {
 
     // Shell targets
     shellTargets.innerHTML = '<option value="">-- 选择设备 --</option>' +
+        devices.map(d => `<option value="${d.serial}">${d.serial} (${d.online ? '在线' : '离线'})</option>`).join('');
+
+    // Settings targets
+    settingsTargets.innerHTML = '<option value="">-- 选择设备 --</option>' +
         devices.map(d => `<option value="${d.serial}">${d.serial} (${d.online ? '在线' : '离线'})</option>`).join('');
 }
 
@@ -580,6 +664,124 @@ async function execShell() {
         // In a real system you'd poll a results endpoint
         document.getElementById('shellOutput').textContent += '\n\n[提示: 设备执行结果通过 MQTT 返回]\n如需查看实时结果，请使用 MQTT 订阅: devices/' + serial + '/ota/result';
     }, 2000);
+}
+
+// ============ Agent Settings ============
+
+function getAgentConfig() {
+    return {
+        mqtt_broker: document.getElementById('cfgMqttBroker').value,
+        mqtt_user: document.getElementById('cfgMqttUser').value,
+        mqtt_pass: document.getElementById('cfgMqttPass').value,
+        mqtt_heartbeat: document.getElementById('cfgHeartbeat').value,
+        ota_server: document.getElementById('cfgOtaServer').value,
+        device_serial: document.getElementById('cfgSerial').value,
+        boot_slot: document.getElementById('cfgBootSlot').value,
+    };
+}
+
+async function pushAgentConfig() {
+    const serial = document.getElementById('settingsTarget').value;
+    if (!serial) { toast('请选择目标设备', 'error'); return; }
+
+    const config = getAgentConfig();
+    // Build a JSON payload of only non-empty / changed fields
+    const payload = {};
+    if (config.mqtt_broker) payload['MQTT_BROKER'] = config.mqtt_broker;
+    if (config.mqtt_user) payload['MQTT_USER'] = config.mqtt_user;
+    if (config.mqtt_pass) payload['MQTT_PASS'] = config.mqtt_pass;
+    if (config.mqtt_heartbeat && config.mqtt_heartbeat !== '60') payload['MQTT_HEARTBEAT'] = config.mqtt_heartbeat;
+    if (config.ota_server) payload['OTA_SERVER'] = config.ota_server;
+    if (config.device_serial) payload['DEVICE_SERIAL'] = config.device_serial;
+    if (config.boot_slot && config.boot_slot !== 'a') payload['BOOT_SLOT'] = config.boot_slot;
+
+    if (Object.keys(payload).length === 0) {
+        toast('请至少填写一个配置项', 'error');
+        return;
+    }
+
+    await api(`/api/device/${serial}/shell`, 'POST', {
+        cmd: buildAgentConfigScript(payload)
+    });
+    toast(`配置已下发到 ${serial}，重启 Agent 后生效`);
+}
+
+function buildAgentConfigScript(envVars) {
+    // Build shell commands to write config to agent's config file
+    const lines = [
+        '# Write agent environment config',
+        'mkdir -p /etc/gk-agent',
+        '> /etc/gk-agent.conf',
+    ];
+    for (const [k, v] of Object.entries(envVars)) {
+        lines.push(`echo "${k}=${v}" >> /etc/gk-agent.conf`);
+    }
+    // Also try to update the init.rc service definition
+    lines.push('# Update init.rc if it exists');
+    lines.push('RCFILE=/system/system/etc/init/gk-agent.rc');
+    lines.push('if [ -f "$RCFILE" ]; then');
+    lines.push('    for env in ' + Object.keys(envVars).join(' ') + '; do');
+    lines.push('        VALUE="${' + '$' + env}"');
+    lines.push('        if grep -q "^    environment ${env}=" "$RCFILE" 2>/dev/null; then');
+    lines.push('            sed -i "s|^    environment ${env}=.*|    environment ${env}=${VALUE}|" "$RCFILE"');
+    lines.push('        else');
+    lines.push('            echo "    environment ${env}=${VALUE}" >> "$RCFILE"');
+    lines.push('        fi');
+    lines.push('    done');
+    lines.push('fi');
+    return lines.join('\n');
+}
+
+async function applyAllDevices() {
+    const config = getAgentConfig();
+    const payload = {};
+    if (config.mqtt_broker) payload['MQTT_BROKER'] = config.mqtt_broker;
+    if (config.mqtt_user) payload['MQTT_USER'] = config.mqtt_user;
+    if (config.mqtt_pass) payload['MQTT_PASS'] = config.mqtt_pass;
+    if (config.mqtt_heartbeat && config.mqtt_heartbeat !== '60') payload['MQTT_HEARTBEAT'] = config.mqtt_heartbeat;
+    if (config.ota_server) payload['OTA_SERVER'] = config.ota_server;
+    if (config.device_serial) payload['DEVICE_SERIAL'] = config.device_serial;
+    if (config.boot_slot && config.boot_slot !== 'a') payload['BOOT_SLOT'] = config.boot_slot;
+
+    if (Object.keys(payload).length === 0) {
+        toast('请至少填写一个配置项', 'error');
+        return;
+    }
+
+    // Get all online devices
+    const devices = await api('/api/devices');
+    const online = devices.filter(d => d.online);
+    if (!online.length) {
+        toast('没有在线设备', 'error');
+        return;
+    }
+
+    let count = 0;
+    for (const d of online) {
+        await api(`/api/device/${d.serial}/shell`, 'POST', {
+            cmd: buildAgentConfigScript(payload)
+        });
+        count++;
+    }
+    toast(`配置已推送到 ${count} 台在线设备`);
+}
+
+async function restartAllAgents() {
+    const devices = await api('/api/devices');
+    const online = devices.filter(d => d.online);
+    if (!online.length) {
+        toast('没有在线设备', 'error');
+        return;
+    }
+
+    if (!confirm(`确认重启 ${online.length} 台在线设备的 Agent ?`)) return;
+
+    let count = 0;
+    for (const d of online) {
+        await api(`/api/device/${d.serial}/restart`, 'POST');
+        count++;
+    }
+    toast(`重启命令已发送到 ${count} 台设备`);
 }
 
 // ============ Init ============

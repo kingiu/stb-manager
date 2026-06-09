@@ -1,0 +1,407 @@
+# init.rc import /vendor/etc/init/hw/init.${ro.hardware}.rc
+# vendor_init is forked from init early in the boot process.
+# Has SELinux context u:r:vendor_init:s0 . , which is more restricted than the system init context.
+# Can only access files/properties that are either vendor-specific or part of the stable system-vendor ABI.
+
+on early-init
+    write /proc/sys/vm/min_free_kbytes 10240
+    # Shouldn't be necessary, but sdcard won't start without it. http://b/22568628.
+    mkdir /mnt 0775 root system
+    mount tmpfs tmpfs /mnt nodev noexec nosuid mode=0775,uid=0,gid=1000
+    mount debugfs debugfs /sys/kernel/debug mode=0755
+
+    # for netd traffic controller bpf started in androidp
+    setrlimit memlock 8388608 8388608
+
+on init
+    symlink /sdcard /mnt/sdcard
+    mkdir /mnt/smb 0771 system system
+    mkdir /mnt/drm 0770 system shell
+    mkdir /mnt/nfsShare 0771 system system
+    mkdir /tmp 0777 system system
+    mount tmpfs tmpfs /tmp/
+    chown system system /tmp
+
+    # Set zRAM compression algorithm to lz4
+    write /sys/block/zram0/comp_algorithm lz4
+    # Set smallest page number in swap cluster to 1
+    write /proc/sys/vm/page-cluster 0
+    # Set swapness
+    write /proc/sys/vm/swappiness 100
+
+# on early-fs
+on fs
+    mount_all ./vendor/etc/fstab.${ro.hardware}
+
+    # teecd access securestore
+    # note it down for kpi
+    # chmod 775 /securestore
+    # restorecon_recursive /securestore
+
+    # insmod usb ko early for camera hal
+    setprop vendor.insmod.ko 1
+    chmod 0777 /private
+    mkdir /private/devinfo 0777 system system
+    mkdir /private/backup 0777 system system
+
+# on post-fs
+on post-fs-data
+    # TODO create dtv data for vendor hal
+    mkdir /data/vendor/dtvdata 0770 system system
+    mkdir /data/vendor/hdcp 0770 system system
+    # Create the directories used by the Wireless subsystem
+    mkdir /data/vendor/misc 0770 wifi wifi
+    mkdir /data/vendor/wifi 0770 wifi wifi
+    mkdir /data/vendor/wifi/wpa 0770 wifi wifi
+    chown wifi wifi /data/vendor/wifi/wpa/wpa_supplicant.conf
+    chown wifi wifi /data/vendor/wifi/wpa/p2p_supplicant.conf
+    mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
+    mkdir /data/vendor/misc/dhcp 0770 dhcp system
+    insmod /vendor/lib/modules/g_ffs.ko idVendor=0x18d1 iSerialNumber=${ro.serialno}
+    # Set tcpip adb port for network adb.
+    setprop service.adb.tcp.port 5555
+    setprop ro.vendor.sf.lcd_density ${ro.sf.lcd_density}
+    chown system system /proc/goke/msp/mce
+    chmod 664 /proc/goke/msp/mce
+
+# on early-boot
+on boot
+    # insmod tntfs drivers
+    exec u:r:vendor_modprobe:s0 root root -- /vendor/bin/toybox_vendor insmod /system/lib/modules/tntfs_gk.ko
+
+    # write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1000000
+    # write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
+    # write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 200000
+    # DVFS
+    # write /sys/module/mali/parameters/mali_dvfs_max_frequency 750000
+    # close pq
+    # write /proc/msp/pq "all disable"
+
+    mkdir /dev/usb-ffs 0770 shell shell
+    mkdir /dev/usb-ffs/adb 0770 shell shell
+    # already mount in init.rc
+    # mount configfs none /config
+    mkdir /config/usb_gadget/g1 0770 shell shell
+    mkdir /config/usb_gadget/g1/functions/ffs.adb
+    mount functionfs adb /dev/usb-ffs/adb uid=2000,gid=2000
+    setprop persist.adb.tcp.port 5555
+
+    # FIXME because nonencrypted doesn't trigger!
+    class_start main
+    class_start late_start
+    start wifi_bt
+
+    chmod 600 /dev/ttyAMA1
+    chown bluetooth net_bt_admin /dev/ttyAMA1
+    #chmod 600 /sys/class/rfkill/rfkill0/state
+    chown bluetooth net_bt_admin /sys/class/rfkill/rfkill0/state
+    # insmod bluetooth drivers
+    insmod /vendor/lib/modules/rtk_btusb.ko
+
+    chmod 600 /dev/rtk_btusb
+    chown bluetooth net_bt_admin /dev/rtk_btusb
+
+    # start essential services
+    start vendor.busybox-date
+    start vendor.gkoptimizednetwork
+    start vendor.ir_user
+
+    mkdir /data/vendor/mediadrm 0770 media mediadrm
+    mkdir /data/vendor/mediadrm/playready 0700 media mediadrm
+    mkdir /data/vendor/playready 0770 root system
+    mkdir /data/vendor/widevine 0770 root system
+    mkdir /data/vendor/marlin 0770 root system
+    mkdir /data/vendor/keymaster 0750 system system
+
+on property:vendor.insmod.ko=1
+    # to insmod usb drivers before camera hal-service starts.
+    insmod /vendor/lib/modules/gk_sdio_detect.ko
+    insmod /vendor/lib/modules/btmtksdio.ko
+    insmod /vendor/lib/modules/uwe5621_bsp_sdio.ko
+    insmod /vendor/lib/modules/uwe5621_bt_sdio.ko
+    #chown bluetooth net_bt_admin /dev/ttyBT0
+    #chown bluetooth net_bt_admin /sys/bus/platform/devices/mtty.0/at
+    #chown bluetooth net_bt_admin /sys/bus/platform/devices/mtty.0/woble_set
+    #chown bluetooth bluetooth /dev/stpbt
+    #chown bluetooth bluetooth /dev/stpbtfwlog
+    #chmod 660 /dev/ttyBT0
+    #chmod 660 /sys/bus/platform/devices/mtty.0/at
+    #chmod 660 /sys/bus/platform/devices/mtty.0/woble_set
+    #chmod 660 /dev/stpbt
+    #chmod 660 /dev/stpbtfwlog
+    insmod /vendor/lib/modules/ehci-platform.ko
+    insmod /vendor/lib/modules/ohci-platform.ko
+    insmod /vendor/lib/modules/xhci-plat-hcd.ko
+    insmod /vendor/lib/modules/btusb.ko
+    insmod /vendor/lib/modules/tntfs_gk.ko
+    insmod /vendor/lib/modules/create.ko
+    insmod /vendor/lib/modules/libahci.ko
+    insmod /vendor/lib/modules/libahci_platform.ko
+    insmod /vendor/lib/modules/ahci_platform.ko
+    insmod /vendor/lib/modules/hid-pt71600-remote.ko
+    insmod /vendor/lib/modules/g_ffs.ko idVendor=0x18d1 iSerialNumber=${ro.serialno}
+    chown bluetooth net_bt_admin /dev/ttyBT0
+    chown bluetooth net_bt_admin /sys/bus/platform/devices/mtty.0/at
+    chown bluetooth net_bt_admin /sys/bus/platform/devices/mtty.0/woble_set
+    chown bluetooth bluetooth /dev/stpbt
+    chown bluetooth bluetooth /dev/stpbtfwlog
+    chmod 660 /dev/ttyBT0
+    chmod 660 /sys/bus/platform/devices/mtty.0/at
+    chmod 660 /sys/bus/platform/devices/mtty.0/woble_set
+    chmod 660 /dev/stpbt
+    chmod 660 /dev/stpbtfwlog
+#add by liujun@cmdc for 5621bt
+    chmod 0666 /sys/class/rfkill/rfkill0/state
+    chmod 0666 /sys/class/rfkill/rfkill0/type
+    chmod 0666 /sys/class/rfkill/rfkill1/state
+    chmod 0666 /sys/class/rfkill/rfkill1/type
+    chmod 0666 /sys/class/rfkill/rfkill2/state
+    chmod 0666 /sys/class/rfkill/rfkill2/type
+#    mkdir -p /dev/usb-ffs/adb
+#    mount functionfs adb /dev/usb-ffs/adb uid=2000,gid=2000
+
+#on property:vendor.insmod.ko=1
+#    insmod /vendor/lib64/modules/gk_sdio_detect.ko
+#    insmod /vendor/lib64/modules/ehci-platform.ko
+#    insmod /vendor/lib64/modules/ohci-platform.ko
+#    insmod /vendor/lib64/modules/xhci-plat-hcd.ko
+#    insmod /vendor/lib64/modules/btusb.ko
+#    insmod /vendor/lib64/modules/tntfs_gk.ko
+#    insmod /vendor/lib64/modules/create.ko
+#    insmod /vendor/lib64/modules/libahci.ko
+#    insmod /vendor/lib64/modules/libahci_platform.ko
+#    insmod /vendor/lib64/modules/ahci_platform.ko
+
+# wifi driver
+on property:vendor.insmod.ko=1 && property:wifi.driver.enable=true
+    insmod /vendor/lib/modules/bcmdhd.ko firmware_path=/vendor/etc/firmware/fw_bcm4356a2_ag.bin nvram_path=/vendor/etc/firmware/nvram_ap6356s.txt
+
+# on property:ro.config.low_ram=true
+    # do sth in low_ram mode.
+
+# swapon_all for zram config after boot_completed
+on property:sys.boot_completed=1
+    swapon_all ./vendor/etc/fstab.${ro.hardware}
+    # minfree
+    write /sys/module/lowmemorykiller/parameters/minfree 4608,6144,9216,10752,23040,74240
+
+# lizhiyuan@stb, 20230310, add for cmdcadbd
+service cmdcadbd /system/bin/cmdcadbd --root_seclabel=u:r:su:s0
+    class core
+    socket adbd stream 660 system system
+    disabled
+    seclabel u:r:adbd:s0
+
+# set the system date and time
+service vendor.busybox-date /vendor/bin/busybox  "date" "2017.01.01-00:00:00"
+    user system
+    group system
+    oneshot
+
+service vendor.ir_user /vendor/bin/android_ir_user
+    user system
+    group system
+
+service vendor.gkoptimizednetwork /vendor/bin/gkoptimizednetwork
+    user system
+    group system
+    disabled
+    oneshot
+
+# for BT PAN
+service vendor.dhcpcd_bt-pan /vendor/bin/dhcpcd -ABKL
+    class main
+    disabled
+    oneshot
+
+service vendor.iprenew_bt-pan /vendor/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
+
+service vendor.dhcpcd_eth0 /vendor/bin/dhcpcd -aABDKL
+    class main
+    disabled
+    oneshot
+
+service vendor.iprenew_eth0 /vendor/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
+
+service vendor.dhcpcd_eth1 /vendor/bin/dhcpcd -aABDKL
+    class main
+    disabled
+    oneshot
+
+service vendor.iprenew_eth1 /vendor/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
+
+service wpa_supplicant /system/vendor/bin/hw/wpa_supplicant \
+     -ip2p0 -Dnl80211 -c/data/vendor/wifi/wpa/p2p_supplicant.conf \
+     -e/data/misc/wifi/entropy.bin -N \
+     -iwlan0 -Dnl80211 -c/data/vendor/wifi/wpa/wpa_supplicant.conf \
+     -O/data/vendor/wifi/wpa/sockets \
+     -g@android:wpa_wlan0
+     socket wpa_wlan0 dgram 660 wifi wifi
+     class main
+     disabled
+     oneshot
+
+service ssv_supplicant /system/vendor/bin/hw/wpa_supplicant \
+     -ip2p0 -Dnl80211 -c/data/vendor/wifi/wpa/p2p_supplicant.conf \
+     -I/vendor/etc/wifi/icomm_p2p_supplicant_overlay.conf \
+     -e/data/misc/wifi/entropy.bin -N \
+     -iwlan0 -Dnl80211 -c/data/vendor/wifi/wpa/wpa_supplicant.conf \
+     -O/data/vendor/wifi/wpa/sockets \
+     -g@android:wpa_wlan0
+     socket wpa_wlan0 dgram 660 wifi wifi
+     class main
+     disabled
+     oneshot
+
+service unisoc_supplicant /system/vendor/bin/hw/wpa_supplicant \
+    -iwlan0 -Dnl80211 -c/data/vendor/wifi/wpa/wpa_supplicant.conf \
+    -puse_p2p_group_interface=1p2p_device=1 \
+    -m/data/vendor/wifi/wpa/p2p_supplicant.conf \
+    -e/data/misc/wifi/entropy.bin -O/data/vendor/wifi/wpa/sockets \
+    -g@android:wpa_wlan0
+    socket wpa_wlan0 dgram 660 wifi wifi
+    class main
+    disabled
+    oneshot
+
+# for BT PAN
+
+service vendor.dhcpcd_bnep0 /vendor/bin/dhcpcd -BKLG
+    disabled
+    oneshot
+
+service vendor.dhcpcd_bnep1 /vendor/bin/dhcpcd -BKLG
+    disabled
+    oneshot
+
+service vendor.dhcpcd_bnep2 /vendor/bin/dhcpcd -BKLG
+    disabled
+    oneshot
+
+service vendor.dhcpcd_bnep3 /vendor/bin/dhcpcd -BKLG
+    disabled
+    oneshot
+
+service vendor.dhcpcd_bnep4 /vendor/bin/dhcpcd -BKLG
+    disabled
+    oneshot
+
+# add gkavplayer
+service vendor.gkavplayer /vendor/bin/gkavplayer
+    class main
+    user  system
+    group root
+
+service vendor.gpio-led /vendor/bin/gpio-led
+    class main
+    user system
+    group system
+    disabled
+    oneshot
+
+# Do not change user of teecd, because tee will check its uid when kernel startup.
+# Run as root for secure storage and dev/tc_ns_client.
+#service vendor.teecd /vendor/bin/teecd
+#    class main
+#    user  root
+#    group root
+#    seclabel u:r:tee:s0
+
+on property:dev.bootcomplete=1
+   setprop sys.init_log_level 4
+   start xiriservice
+   start softprobe
+   start preinstall
+   start stbdetector
+
+on property:sys.shutdown.requested=*
+   write /sys/devices/platform/droid_pm/notify shutdown
+
+service bugreport /system/bin/dumpstate -d -p -B -z \
+        -o /data/user_de/0/com.android.shell/files/bugreports/bugreport
+    class main
+    disabled
+    oneshot
+    keycodes 114 115 116
+
+# wifi/bt detect
+service wifi_bt /vendor/bin/wifi_bt
+    user root
+    group root system
+    oneshot
+    seclabel u:r:wifi_bt:s0
+
+service xiriservice /system/bin/xiriservice_All
+    class main
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:shell:s0
+
+service softprobe /system/bin/sh /vendor/bin/startsoftdetector.sh
+    user root
+    group root
+    oneshot
+    disabled
+    seclabel u:r:shell:s0
+
+service swtelnetd /system/bin/sh /system/bin/swtelnetd.sh
+    class main
+    user root
+    group root root
+    disabled
+    oneshot
+    seclabel u:r:shell:s0
+    
+service sunniwell_setup /system/bin/sh /vendor/bin/init_sunniwell.sh
+	class main
+	user root
+	group root
+	oneshot
+	seclabel u:r:shell:s0
+service tcpdump_capture /system/bin/sh /vendor/bin/tcpdump_capture.sh
+    class main
+    user root
+    group root
+    seclabel u:r:shell:s0
+    disabled
+    oneshot
+
+service preinstall /system/bin/sh /vendor/bin/preinstall.sh
+    class main
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:shell:s0
+
+on property:ro.vendor.tcpdump.enabled=true
+    start tcpdump_capture
+
+on property:ro.vendor.tcpdump.enabled=false
+    stop tcpdump_capture
+    chmod 755 /tmp/stb_boot.pcap
+    chown system system /tmp/stb_boot.pcap
+
+on property:persist.sys.tcpdump.capture=false
+    stop tcpdump_capture
+    chown system system /tmp/stb_boot.pcap
+    chmod 755 /tmp/stb_boot.pcap
+
+service stbdetector /system/bin/startstbagent.sh
+    class main
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:shell:s0

@@ -1,0 +1,24 @@
+#!/system/bin/sh
+
+#for debug print
+#CONSOLEDEV=/dev/console
+
+IFACE=eth0
+ID=85
+MACVLAN="mv"
+
+IFACE=`getprop persist.ethernet.vlan.iface`
+ID=`getprop persist.ethernet.vlan.id`
+
+echo "vlan start with iface = $IFACE, id = $ID"
+
+result=$(echo $ID | grep $MACVLAN)
+if [[ $result != "" ]];
+then
+    CMD="ip link add link $IFACE name $IFACE.$ID type macvlan mode bridge"
+    $CMD
+else
+    busybox vconfig add $IFACE $ID
+fi
+
+ifconfig $IFACE.$ID up

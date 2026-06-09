@@ -1,0 +1,5 @@
+#!/system/bin/sh
+
+echo -e "--send_intent=update_ui" > /cache/recovery/command
+echo -e "boot-recovery">/dev/block/by-name/misc
+reboot

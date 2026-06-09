@@ -1,0 +1,38 @@
+<permissions>
+    <feature name="android.hardware.audio.output" />
+    <feature name="android.hardware.audio.low_latency" />
+    <feature name="android.hardware.bluetooth" />
+    <feature name="android.hardware.bluetooth_le" />
+    <feature name="android.hardware.camera.external" />
+    <feature name="android.hardware.camera.any" />
+    <feature name="android.hardware.ethernet" />
+    <feature name="android.hardware.hdmi.cec" />
+    <feature name="android.hardware.location" />
+    <feature name="android.hardware.location.network" />
+<!--<feature name="android.hardware.microphone" /> Option-->
+    <feature name="android.hardware.screen.landscape" />
+    <feature name="android.hardware.type.television" />
+    <feature name="android.hardware.usb.host" />
+    <feature name="android.hardware.wifi" />
+    <feature name="android.hardware.wifi.direct" />
+
+    <feature name="android.software.app_widgets" /> <!--Launcher2 need-->
+    <feature name="android.software.backup" />
+    <feature name="android.software.input_methods" /> 
+    <!--<feature name="android.software.leanback" />-->
+    <feature name="android.software.leanback_only" />
+    <feature name="android.software.live_tv" />
+    <feature name="android.software.picture_in_picture" />
+    <feature name="android.software.voice_recognizers" />
+    <feature name="android.software.webview" />
+    <feature name="android.software.cant_save_state" /> <!--need for androidP-->
+    <feature name="android.software.verified_boot" /> <!--need for AVB-->
+
+    <feature name="android.hardware.usb.accessory" />  <!--USB device-->
+<!--<feature name="android.software.live_wallpaper" /> live_wallpaper-->
+<!--<feature name="android.software.home_screen" />    optional launcher-->
+<!--<feature name="android.hardware.faketouch" />-->
+
+    <feature name="android.software.cts" />  <!--Cts need for AndroidO-->
+</permissions>
+

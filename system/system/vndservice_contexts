@@ -1,0 +1,4 @@
+*                       u:object_r:default_android_vndservice:s0
+gkavplayer                                u:object_r:gkavplayer_service:s0
+android_ir_user                           u:object_r:android_ir_user_service:s0
+GkDisplay                                 u:object_r:gkdisplay_service:s0

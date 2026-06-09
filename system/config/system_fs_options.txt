@@ -1,0 +1,5 @@
+FileName: system.img
+Size: 1572864000
+Type: Raw
+Journal: No
+FolderName: system

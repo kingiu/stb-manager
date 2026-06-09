@@ -1,0 +1,5 @@
+#rc file
+service CMCCPlayerManager_service  /vendor/bin/hw/android.hardware.CMCCPlayerManager@1.0-service
+	class hal
+	user root
+	group root audio media media_rw system graphics

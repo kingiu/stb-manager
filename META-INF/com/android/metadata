@@ -1,0 +1,14 @@
+customer=CMDC
+maincpu=GK6323V100C
+manufacturer=ALL
+ota-property-files=metadata:69:545         
+ota-required-cache=0
+ota-type=BLOCK
+post-build=AndroidP/CMDC/GK6323V100C:9.0.0/CM311-5-ALL/CM311-5-ALL-HA.00.230915.01:eng/test-keys
+post-build-incremental=CM311-5-ZD-HA.00.230915.01
+post-sdk-level=28
+post-security-patch-level=2021-06-10
+post-timestamp=1697086990
+pre-device=GK6323V100C
+province=HA
+stb-build-id=CM311-5s-ZG;CM311-5-ZG;CM321-5s-ZG;CM321-5-ZG;CM311-5s-CH;CM311-5-CH;CM321-5s-CH;CM321-5-CH;CM311-5s-YS;CM311-5-YS;CM321-5s-YS;CM321-5-YS

@@ -1,0 +1,1 @@
+make_ext4fs -l 1572864000 -s -J -T 1781011157 -L system -a system -S "./config\system_file_contexts.txt" -C "./config\system_fs_config.txt" "../system.img" "./system"

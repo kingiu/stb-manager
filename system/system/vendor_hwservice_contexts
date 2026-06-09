@@ -1,0 +1,16 @@
+vendor.goke.hardware.hwcursor::IHwcursor                 u:object_r:hal_hwcursor_hwservice:s0
+vendor.goke.hardware.hwjpeg::IHwjpeg                     u:object_r:hal_hwjpeg_hwservice:s0
+vendor.hwdisplay.hardware.hwdisplay::IHwdisplay               u:object_r:hal_hwdisplay_hwservice:s0
+vendor.goke.hardware.hwgraphics::IGraphics               u:object_r:hal_hwgraphics_hwservice:s0
+vendor.goke.hardware.hwpq::IHwPq                         u:object_r:hal_hwpq_hwservice:s0
+vendor.goke.hardware.hwsysmanager::IHwSysManager         u:object_r:hal_hwsysmanager_hwservice:s0
+vendor.goke.hardware.hwdlnaservice::IHwDlnaService       u:object_r:hal_hwdlnaservice_hwservice:s0
+vendor.goke.hardware.hwaudio::IHwaudio                   u:object_r:hal_hwaudio_hwservice:s0
+vendor.goke.hardware.hwandroidmediahal::IHwandroidmediahal    u:object_r:hal_hwandroidmediahal_hwservice:s0
+vendor.nxplayer.hardware.hwnxmediaplayerhal::INxMediaPlayerStore       u:object_r:hal_hwnxmediaplayerhal_hwservice:s0
+vendor.nxplayer.hardware.hwnxmediaplayerhal::INxPlayerMetadataStore    u:object_r:hal_hwnxmediaplayerhal_hwservice:s0
+vendor.goke.hardware.hwomx::IHwOmx                       u:object_r:hal_hwomx_hwservice:s0
+vendor.goke.hardware.hwimw::Ihwimw                       u:object_r:hal_hwimw_hwservice:s0
+vendor.goke.hardware.hwdecryptsample::Ihwdecryptsample   u:object_r:hal_hwdecryptsample_hwservice:s0
+android.hardware.CMCCPlayerManager::ICMCCPlayerManager       u:object_r:hal_CMCCPlayerManager_hwservice:s0
+vendor.goke.hardware.hwcaption::IHwcaption         u:object_r:hal_hwcaption_hwservice:s0

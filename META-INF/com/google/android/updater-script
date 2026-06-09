@@ -1,0 +1,57 @@
+getprop("ro.product.device") == "GK6323V100C" || abort("E3004: This package is for \"GK6323V100C\" devices; this is a \"" + getprop("ro.product.device") + "\".");
+ui_print("Target: AndroidP/CMDC/GK6323V100C:9.0.0/CM311-5-ALL/CM311-5-ALL-HA.00.230915.01:eng/test-keys");
+open_led();
+if (get_stage("/dev/block/platform/soc/f9830000.gkmciv200.MMC/by-name/misc") == "" ) then
+ui_print("update recovery... stage: 1/2......");
+ui_print("update recoverybak and bootargsbak......");
+if (get_recovery_state("/dev/block/platform/soc/f9830000.gkmciv200.MMC/by-name/misc") != "b" ) then
+ui_print("update recoverybak...");
+package_extract_file("recoverybak.img", "/dev/block/platform/soc/f9830000.gkmciv200.MMC/by-name/recoverybak");
+ui_print("update bootargsbak...");
+package_extract_file("bootargsbak.img", "/dev/block/platform/soc/f9830000.gkmciv200.MMC/by-name/bootargsbak");
+set_recovery_state("/dev/block/platform/soc/f9830000.gkmciv200.MMC/by-name/misc", "b");
+endif;
+ui_print("update recovery(not bak)......");
+ui_print("update recovery...");
+package_extract_file("recovery.img", "/dev/block/platform/soc/f9830000.gkmciv200.MMC/by-name/recovery");
+ui_print("update bootargs...");
+package_extract_file("bootargs.img", "/dev/block/platform/soc/f9830000.gkmciv200.MMC/by-name/bootargs");
+set_recovery_state("/dev/block/platform/soc/f9830000.gkmciv200.MMC/by-name/misc", "a");
+set_stage("/dev/block/platform/soc/f9830000.gkmciv200.MMC/by-name/misc", "2/2");
+endif;
+if (get_stage("/dev/block/platform/soc/f9830000.gkmciv200.MMC/by-name/misc") == "2/2" ) then
+ui_print("update recovery...stage 2/2......");
+ui_print("update fastboot...");
+package_extract_file("fastboot.img", "/dev/block/platform/soc/f9830000.gkmciv200.MMC/by-name/fastboot");
+ui_print("update atf...");
+package_extract_file("bl31.img", "/dev/block/platform/soc/f9830000.gkmciv200.MMC/by-name/atf");
+ui_print("update logo...");
+package_extract_file("logo.img", "/dev/block/platform/soc/f9830000.gkmciv200.MMC/by-name/logo");
+ui_print("update pqparam...");
+package_extract_file("pqparam.img", "/dev/block/platform/soc/f9830000.gkmciv200.MMC/by-name/pqparam");
+ui_print("update trustedcore...");
+package_extract_file("trustedcore.img", "/dev/block/platform/soc/f9830000.gkmciv200.MMC/by-name/trustedcore");
+ui_print("update dtbo...");
+package_extract_file("dtbo.img", "/dev/block/platform/soc/f9830000.gkmciv200.MMC/by-name/dtbo");
+endif;
+mount("ext4", "EMMC", "/dev/block/platform/soc/f9830000.gkmciv200.MMC/by-name/cache", "/cache");
+save_prev_info();
+show_progress(0.650000, 0);
+ui_print("Patching system image unconditionally...");
+block_image_update("/dev/block/platform/soc/f9830000.gkmciv200.MMC/by-name/system", package_extract_file("system.transfer.list"), "system.new.dat.br", "system.patch.dat") ||
+  abort("E1001: Failed to update system image.");
+show_progress(0.100000, 0);
+ui_print("Patching vendor image unconditionally...");
+block_image_update("/dev/block/platform/soc/f9830000.gkmciv200.MMC/by-name/vendor", package_extract_file("vendor.transfer.list"), "vendor.new.dat.br", "vendor.patch.dat") ||
+  abort("E2001: Failed to update vendor image.");
+show_progress(0.050000, 5);
+package_extract_file("boot.img", "/dev/block/platform/soc/f9830000.gkmciv200.MMC/by-name/boot");
+show_progress(0.200000, 10);
+mount("ext4", "EMMC", "/dev/block/platform/soc/f9830000.gkmciv200.MMC/by-name/userdata", "/data", "");
+if getprop("ro.build.version.incremental") == "CM311-5-CH-HA.00.20230506.01" then
+sw_parameters_backup("cmcc_ha");
+sw_clean_path("/data/dalvik-cache");
+endif;
+set_progress(1.000000);
+close_led();
+unmount("/data");

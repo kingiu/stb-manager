@@ -1,0 +1,96 @@
+#line 1 "device/goke/kunlun/system/sepolicy/vendor/property_contexts"
+# Only vendor processes can access vendor properties in AndroidP
+# 'vendor. ro.vendor. persist.vendor.' has been defined by android.
+# see vendor_default_prop in system/sepolicy/private/property_contexts
+
+# common
+persist.prop.             u:object_r:gk_prop:s0
+ro.prop.                  u:object_r:gk_prop:s0
+prop.                     u:object_r:gk_prop:s0
+ro.optimizedboot.         u:object_r:gk_prop:s0
+
+# media
+persist.vendor.media.     u:object_r:gk_prop:s0
+ro.vendor.media.          u:object_r:gk_prop:s0
+vendor.media.             u:object_r:gk_prop:s0
+service.media.omx.        u:object_r:gk_prop:s0
+persist.sys.media.        u:object_r:gk_prop:s0
+
+# audio
+persist.audiohal.         u:object_r:gk_prop:s0
+ro.audiohal.              u:object_r:gk_prop:s0
+audiohal.                 u:object_r:gk_prop:s0
+ro.dolby.                 u:object_r:gk_prop:s0
+dolby.                    u:object_r:gk_prop:s0
+
+# graphic
+persist.graph.            u:object_r:gk_prop:s0
+ro.graph.                 u:object_r:gk_prop:s0
+graph.                    u:object_r:gk_prop:s0
+persist.vendor.prop.      u:object_r:gk_prop:s0
+
+# display
+persist.display.          u:object_r:gk_prop:s0
+ro.display.               u:object_r:gk_prop:s0
+display.                  u:object_r:gk_prop:s0
+sys.display-size          u:object_r:gk_prop:s0
+sys.display-refreshrate   u:object_r:gk_prop:s0
+vendor.display.           u:object_r:gk_prop:s0
+
+# camera
+ro.camera.                u:object_r:gk_prop:s0
+camera.                   u:object_r:gk_prop:s0
+
+# dtv
+dtv.                      u:object_r:gk_prop:s0
+
+# network
+persist.sys.ethernet.     u:object_r:exported_system_prop:s0
+persist.ethernet.         u:object_r:gk_prop:s0
+ethernet.                 u:object_r:gk_prop:s0
+persist.network.          u:object_r:gk_prop:s0
+network.                  u:object_r:gk_prop:s0
+pppoe.                    u:object_r:gk_prop:s0
+dhclient.                 u:object_r:gk_prop:s0
+ipconflict.               u:object_r:gk_prop:s0
+net6.                     u:object_r:gk_prop:s0
+
+# network adb
+persist.adb.tcp.port      u:object_r:gk_prop:s0
+
+# hdmi
+hdmisink.cec.             u:object_r:gk_prop:s0
+#PVS
+persist.PVS.              u:object_r:gk_prop:s0
+# gkpq
+persist.pq.               u:object_r:gk_prop:s0
+ro.pq.                    u:object_r:gk_prop:s0
+pq.                       u:object_r:gk_prop:s0
+
+# wifi driver
+wifi.driver.              u:object_r:gk_prop:s0
+
+# suspend
+persist.suspend.          u:object_r:gk_prop:s0
+
+# drm
+drm.widevine.             u:object_r:gk_prop:s0
+drm.playready.            u:object_r:gk_prop:s0
+
+# MediaScan
+ro.mediaScanner.          u:object_r:gk_prop:s0
+
+# Vold
+persist.sys.adoptable     u:object_r:gk_prop:s0
+vendor.imw.               u:object_r:gk_prop:s0
+
+# nrdp
+vendor.display-size       u:object_r:nrdp_prop:s0
+persist.sys.ca.type       u:object_r:gk_prop:s0
+
+# FIXME abandoned
+# persist.dhcp.             u:object_r:gk_prop:s0
+#line 1 "system/sepolicy/reqd_mask/property_contexts"
+# empty property_contexts file - this file is used to generate an empty
+# non-platform property context for devices without any property_contexts
+# customizations.

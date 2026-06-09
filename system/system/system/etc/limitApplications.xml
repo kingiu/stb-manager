@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Applications>
+    <key>
+        <apkName>MultiScreenServer.apk</apkName>
+        <apkName>HandsetForMultiScreen.apk</apkName>
+        <apkName>LiveWallpapersPicker.apk</apkName>
+        <apkName>Email.apk</apkName>
+        <apkName>Keyguard.apk</apkName>
+        <apkName>TeleService.apk</apkName>
+        <apkName>GkMediaShare.apk</apkName>
+        <apkName>PowerControl.apk</apkName>
+        <apkName>SkyPlayer.apk</apkName>
+    </key>
+</Applications>

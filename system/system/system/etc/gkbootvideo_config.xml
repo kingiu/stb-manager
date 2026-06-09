@@ -1,0 +1,15 @@
+<?xml version='1.0'?>
+<config>
+  <bootvideo>
+    <property key="path1" value="/data/local/bootvideo.mp4"/>
+    <property key="path2" value="/data/local/bootvideosnd.mp4"/>
+    <property key="strPath1" value="/data/local/strbootvideo.mp4"/>
+    <property key="strPath2" value="/data/local/strbootvideosnd.mp4"/>
+    <property key="isEnableInput" enable="true"/>
+    <property key="isEnableUI" enable="true">
+      <property key="isEnableCountDown" enable="true" language="en"/>
+      <property key="isEnableVolumeBar" enable="true"/>
+      <property key="isEnableVolumeMute" enable="true"/>
+    </property>
+  </bootvideo>
+</config>

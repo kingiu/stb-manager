@@ -1,0 +1,20 @@
+<Config>
+        <Rssi>70</Rssi>
+        <AutoRemoveBond>false</AutoRemoveBond>
+        <DeviceNames>
+			<Name>CMCC_Voice_Remote</Name>
+			<Name>CMIOT_REMOTE</Name>
+			<Name>IFLY REMOTE</Name>
+			<Name>IFLY_REMOTE</Name>
+			<Name>XFRE</Name>
+			<Name>MGRC</Name>
+			<Name>语音遥控器</Name>
+			<Name>YYYKQ</Name>
+			<Name>BLE_REMOTE</Name>
+			<Name>CMCC-Magic-Bar</Name>
+		</DeviceNames>
+		<TimeOut>10</TimeOut>
+		<QuitImmediatelyInConnected>true</QuitImmediatelyInConnected>
+		<AlwaysRunningInNoConnectedCase>false</AlwaysRunningInNoConnectedCase>
+		<OnlyPairMode>true</OnlyPairMode>
+</Config>

@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <remote fetch="ssh://cmcc.iptv2.com:29418/GKW_9.0_mirror/" name="GK6323V100C"/>
+  
+  <default remote="GK6323V100C" revision="master" sync-j="4"/>
+  
+  <project dest-branch="master" name="Reference/DataSheet" path="GK6323V100C/Reference/DataSheet" revision="c5db62895c5c607addc1eb6c6c268c284f3b62b1" upstream="master"/>
+  <project dest-branch="master" name="art" path="GK6323V100C/art" revision="1599da7cbc68870d71c1470408858a72ed30ca3d" upstream="master"/>
+  <project dest-branch="master" name="bionic" path="GK6323V100C/bionic" revision="4cc568f47d1fd0d8144ced8c7c393ec2868de4f1" upstream="master"/>
+  <project dest-branch="master" name="bootable/recovery" path="GK6323V100C/bootable/recovery" revision="57586e8b0336a60768abf733e4da9ea6c32bf9b4" upstream="master"/>
+  <project dest-branch="master" name="build/blueprint" path="GK6323V100C/build/blueprint" revision="8dcfe5a5c00a4056886a08ec081dd6161a9c2df3" upstream="master"/>
+  <project dest-branch="master" name="build/kati" path="GK6323V100C/build/kati" revision="c0ed165882f13f649ec241c207b5fe9cc3b2f4b5" upstream="master"/>
+  <project dest-branch="master" name="build/make" path="GK6323V100C/build/make" revision="515faaaf1f9cfa0b4db0e6a23633a56bd398044f" upstream="master">
+    <copyfile dest="GK6323V100C/Makefile" src="core/root.mk"/>
+    <linkfile dest="GK6323V100C/build/CleanSpec.mk" src="CleanSpec.mk"/>
+    <linkfile dest="GK6323V100C/build/buildspec.mk.default" src="buildspec.mk.default"/>
+    <linkfile dest="GK6323V100C/build/core" src="core"/>
+    <linkfile dest="GK6323V100C/build/envsetup.sh" src="envsetup.sh"/>
+    <linkfile dest="GK6323V100C/build/target" src="target"/>
+    <linkfile dest="GK6323V100C/build/tools" src="tools"/>
+  </project>
+  <project dest-branch="master" name="build/soong" path="GK6323V100C/build/soong" revision="ab619686ecc29b9099f4d8e33bb3727c81bb46db" upstream="master">
+    <linkfile dest="GK6323V100C/Android.bp" src="root.bp"/>
+    <linkfile dest="GK6323V100C/bootstrap.bash" src="bootstrap.bash"/>
+  </project>
+  <project dest-branch="master" name="compatibility/cdd" path="GK6323V100C/compatibility/cdd" revision="334b2668a4bcb99a77effce965114d2d7d104f41" upstream="master"/>
+  <project dest-branch="master" name="cts" path="GK6323V100C/cts" revision="0793942b04b1857c7f4ddef0ac2305da23b25e4e" upstream="master"/>
+  <project dest-branch="master" name="dalvik" path="GK6323V100C/dalvik" revision="2c6129cb878b4d19cb336853d24631d9743991b4" upstream="master"/>
+  <project dest-branch="master" name="developers/build" path="GK6323V100C/developers/build" revision="a601984dc889babad2cef686742d122c26e61a60" upstream="master"/>
+  <project dest-branch="master" name="developers/demos/JustForUs" path="GK6323V100C/developers/demos/JustForUs" revision="dfa5f9fe857bab63b869030c0ff87770dbf1f713" upstream="master"/>
+  <project dest-branch="master" name="developers/samples/android" path="GK6323V100C/developers/samples/android" revision="61cfd61e46a427fc2a582d98f84e5da98c0c33d2" upstream="master"/>
+  <project dest-branch="master" name="development" path="GK6323V100C/development" revision="655fb6ba499787eefc976b71daab51eb10d02f9b" upstream="master"/>
+  <project dest-branch="master" name="device/cmdc/CmdcRootService" path="GK6323V100C/device/cmdc/CmdcRootService" revision="ff722bbb1785b426d7fdb19e802fca89c2b4f6ed" upstream="master"/>
+  <project dest-branch="master" name="device/cmdc/memtester-4.5.1" path="GK6323V100C/device/cmdc/memtester-4.5.1" revision="cb24a72deab93a2d04c5c896595ddeba3b8d0531" upstream="master"/>
+  <project dest-branch="master" name="device/cmdc_patch" path="GK6323V100C/device/cmdc_patch" revision="57c35bccc2ec2fe6845304fcc3e852e566a1648d" upstream="master"/>
+  <project dest-branch="master" name="device/common" path="GK6323V100C/device/common" revision="edaccabd36b3834125c6eead534f602c524d01e2" upstream="master"/>
+  <project dest-branch="master" name="device/generic" path="GK6323V100C/device/generic" revision="8b4dfcb418101fdb332b15ffc30efdff9d453091" upstream="master"/>
+  <project dest-branch="master" name="device/goke/GK6323V100C" path="GK6323V100C/device/goke/GK6323V100C" revision="6b0da7c9d4c5f2c0e116bac336b89ee5f66d9b50" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun" path="GK6323V100C/device/goke/kunlun" revision="abd5be80baacc26877a9c51dc14153268ba36b9b" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/bootable" path="GK6323V100C/device/goke/kunlun/bootable" revision="690d5c3667a62c3538ac0827a4e963c75f34f018" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/build" path="GK6323V100C/device/goke/kunlun/build" revision="3e3e7bdf9649bbb0005ef14520520f7ac5ee7547" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/component" path="GK6323V100C/device/goke/kunlun/component" revision="1cf0c8a6c42c3d5b1a7ad45308bedd5d48a3a52e" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/customize" path="GK6323V100C/device/goke/kunlun/customize" revision="e99d392d42086bfd466f5384ec24b110bc9ba3f3" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/development" path="GK6323V100C/device/goke/kunlun/development" revision="12fa30afd8268935c2532b3a45ed07744626ba7c" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/etc" path="GK6323V100C/device/goke/kunlun/etc" revision="5006bf816798a42b59732059c261aabc4215a774" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/external" path="GK6323V100C/device/goke/kunlun/external" revision="b759ae8d340c482c3b6ce46164d0b9aaad923e0a" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/frameworks" path="GK6323V100C/device/goke/kunlun/frameworks" revision="c5840dd3787f7540adb9f84d9080148dfa63722b" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/goke_hal" path="GK6323V100C/device/goke/kunlun/goke_hal" revision="7a3983e3a86ad7e8dfc6a8b863de1f8e9f8e1f79" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/hardware" path="GK6323V100C/device/goke/kunlun/hardware" revision="2ea4b258dc9c16bd813537588edaec828d9953c5" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/packages" path="GK6323V100C/device/goke/kunlun/packages" revision="9bd8eda0ac751f0a0c0d4f9760b84fc90f6d5a7c" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/prebuilts" path="GK6323V100C/device/goke/kunlun/prebuilts" revision="419c19433a3deecddfad9b3b2ca6803bf4ddd215" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk" path="GK6323V100C/device/goke/kunlun/sdk" revision="e3bd112231df9b89fd1bd51c3a48d607f673f745" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/configs" path="GK6323V100C/device/goke/kunlun/sdk/configs" revision="ca548099e68c3b34e815173aca238d97a940c4cf" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/prebuilts" path="GK6323V100C/device/goke/kunlun/sdk/prebuilts" revision="b5da77868bacde504f5ed7a66a7272755216dfba" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/sample" path="GK6323V100C/device/goke/kunlun/sdk/sample" revision="9520db8d1152414d0893716ce1bb74b23292458b" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/scripts" path="GK6323V100C/device/goke/kunlun/sdk/scripts" revision="49a56fe45a5119fa906b48224b1b5553981b6525" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/boot" path="GK6323V100C/device/goke/kunlun/sdk/source/boot" revision="ac358261e29b66eeace6b52dbb375cf6660048a2" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/boot/product" path="GK6323V100C/device/goke/kunlun/sdk/source/boot/product" revision="e56f4e132c4f9a90ecf48d95b31f95a257612a3b" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/boot/sysreg" path="GK6323V100C/device/goke/kunlun/sdk/source/boot/sysreg" revision="bf2111e327774cc38f793ca327f76e1abeb0005f" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/boot/u-boot" path="GK6323V100C/device/goke/kunlun/sdk/source/boot/u-boot" revision="f52ee9e6c6e04248f312c1ef5670a27bdef87053" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/common" path="GK6323V100C/device/goke/kunlun/sdk/source/common" revision="40e87940a309f9f9fd09db34406dba9f7b0fe972" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component" path="GK6323V100C/device/goke/kunlun/sdk/source/component" revision="3bbf7f9a738211806ced259a493ec21cb8bd1ae1" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/bluetooth" path="GK6323V100C/device/goke/kunlun/sdk/source/component/bluetooth" revision="8753ab268dbfeab5dccc47014f43173b1da3a218" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/exfat" path="GK6323V100C/device/goke/kunlun/sdk/source/component/exfat" revision="fe35aea35865adee053c12a3e28b6ab605eb1e51" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/ha_codec" path="GK6323V100C/device/goke/kunlun/sdk/source/component/ha_codec" revision="13fce911f2fce647cb1c9d8a5aec917b6187caa5" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/hal" path="GK6323V100C/device/goke/kunlun/sdk/source/component/hal" revision="59fd13cbfb3ab9ba477c363b6be505feed0355c8" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/jpeg" path="GK6323V100C/device/goke/kunlun/sdk/source/component/jpeg" revision="1ae616d8847e9717b93b8ce564bde13be64385c4" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/karaoke" path="GK6323V100C/device/goke/kunlun/sdk/source/component/karaoke" revision="f53d0cf99d23a30cb14743442e56bb296fb0964b" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/karaoke_kde" path="GK6323V100C/device/goke/kunlun/sdk/source/component/karaoke_kde" revision="85ccb199f2184ee58a29f13fc67bfae7876a4380" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/pm" path="GK6323V100C/device/goke/kunlun/sdk/source/component/pm" revision="2fc970f3213de7989575148dbcec5bab01ed11c9" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/png" path="GK6323V100C/device/goke/kunlun/sdk/source/component/png" revision="4fa18c42f3f32a0c715a78a8406bc7d44db7e3c5" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/resampler" path="GK6323V100C/device/goke/kunlun/sdk/source/component/resampler" revision="ad368e272916f4a94c7577581f5cca53a17db934" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/subtitle" path="GK6323V100C/device/goke/kunlun/sdk/source/component/subtitle" revision="5265f20edb764a2e7e43db1bb79d13807b2c6435" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/subtoutput" path="GK6323V100C/device/goke/kunlun/sdk/source/component/subtoutput" revision="fe66b30520def7bc56745f32d10bfaba9706deb8" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/teletext" path="GK6323V100C/device/goke/kunlun/sdk/source/component/teletext" revision="fc5b80f4fb737029e6ca891e7844283d500819c7" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi" revision="b2b3f478bc9da7412fbea39226a104e76335199e" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi/drv" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi/drv" revision="c4223d5789fcf2d33703c9aebd4fc53a5d8c5565" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi/drv/android_driver" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi/drv/android_driver" revision="9bd6d2b26cdb925cccb277b77b72bf3828659ca8" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi/drv/pcie_mt76x2te" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi/drv/pcie_mt76x2te" revision="0cf63cc89b84e0ef635da92e48dec12696a0410e" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi/drv/pcie_rtl8812ae" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi/drv/pcie_rtl8812ae" revision="d151f705501a6624168d17b2a424cc370872f4df" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi/drv/pcie_rtl8812ar" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi/drv/pcie_rtl8812ar" revision="2518880cd999bd6ebd82e15a729ffa1e1bed486c" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi/drv/pcie_rtl8822beh" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi/drv/pcie_rtl8822beh" revision="db15a3d2d5a5b83b835137df3aaf4e6168701066" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi/drv/sdio_mt7661rs" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi/drv/sdio_mt7661rs" revision="15a225a63868a34b44516bcabd385f114a448261" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi/drv/sdio_mt7668bs" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi/drv/sdio_mt7668bs" revision="7614d1107ad739cd47b6efc106e29c341ea940e8" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi/drv/sdio_rtl8822bs" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi/drv/sdio_rtl8822bs" revision="18b797b129d61c2ba34f3adf5d718e87e7ed642e" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi/drv/sdio_rtl8822cs" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi/drv/sdio_rtl8822cs" revision="79de129588e59402bb3554961401dad4c88b5fdc" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi/drv/sdio_ssv6x5x" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi/drv/sdio_ssv6x5x" revision="6994546ee2a416bf5700182540d74ae869b8b439" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi/drv/sdio_uwe5621" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi/drv/sdio_uwe5621" revision="afa30acd2f1b07134ffaa9356cbb5f36f9f2c2a2" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi/drv/usb_mt7601u" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi/drv/usb_mt7601u" revision="854b273b12d14dfefdd1ff445874199f4c74d5af" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi/drv/usb_mt76x2u" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi/drv/usb_mt76x2u" revision="984f635832681055730324b6e22710aa92b68443" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi/drv/usb_rtl8188eu" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi/drv/usb_rtl8188eu" revision="b97af750e4b69b66830c36a701dd1720113d3c53" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi/drv/usb_rtl8188fu" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi/drv/usb_rtl8188fu" revision="8e2635a7bb53f3a87187380c26befed6b96fb798" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi/drv/usb_rtl8192eu" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi/drv/usb_rtl8192eu" revision="223fba111cb107ffa327273e657b6f5b1e76c4f6" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi/drv/usb_rtl8192fc" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi/drv/usb_rtl8192fc" revision="a1b4dc47e5f5236b952a8901a10306282f2d8647" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi/drv/usb_rtl8723bu" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi/drv/usb_rtl8723bu" revision="6c8557c19cb42366b7900a78f2a6c18eb93c2193" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi/drv/usb_rtl8723du" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi/drv/usb_rtl8723du" revision="1ec77cd49addd4f155f213088c10e83e71d33d14" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi/drv/usb_rtl8812au" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi/drv/usb_rtl8812au" revision="3fe4400311fda8d1070c49c2e6e5f27616283901" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi/drv/usb_rtl8821au" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi/drv/usb_rtl8821au" revision="7c28ae4461f519c06b5c78d8388a60ba3fee08ba" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi/drv/usb_rtl8821cu" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi/drv/usb_rtl8821cu" revision="485a0fa915fcebce4d52df601d071dcf0c85bce9" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/component/wifi/drv/usb_rtl8822bu" path="GK6323V100C/device/goke/kunlun/sdk/source/component/wifi/drv/usb_rtl8822bu" revision="d3b0c6700b527c2468132f877e49dff2c7bf7dff" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/kernel" path="GK6323V100C/device/goke/kunlun/sdk/source/kernel" revision="f0213688105c04adbe12790b0033f577ac56698a" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/source/msp" path="GK6323V100C/device/goke/kunlun/sdk/source/msp" revision="c2b4bfaa1130025213d6eeba4a569f2e5cfd3d5e" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/third_party/open_source" path="GK6323V100C/device/goke/kunlun/sdk/third_party/open_source" revision="92a34b8ccdab3a91e9631431b2319be563ef1e45" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/sdk/tools" path="GK6323V100C/device/goke/kunlun/sdk/tools" revision="d4f0d16914f3253019473c68261b3c7de5af540a" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/system/bluetooth" path="GK6323V100C/device/goke/kunlun/system/bluetooth" revision="8f99d8f452379a2458bf2b9fd0e1f082c7be4122" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/system/bluetooth/mtkbt" path="GK6323V100C/device/goke/kunlun/system/bluetooth/mtkbt" revision="e6340c1ad0965ad0c6c3d6999cad0193b79fa573" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/system/bluetooth/rtkbt" path="GK6323V100C/device/goke/kunlun/system/bluetooth/rtkbt" revision="0d6a325971a2c693febac0396210f623e55befeb" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/system/bluetooth/sdio_detect" path="GK6323V100C/device/goke/kunlun/system/bluetooth/sdio_detect" revision="c42a4968cebd11f8d0bbfcad4b46918ecfc0b960" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/system/bluetooth/unisocbt" path="GK6323V100C/device/goke/kunlun/system/bluetooth/unisocbt" revision="6c510818e69ce2b987357ef37c7c93a97b1ad52d" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/system/ctcverifyboot" path="GK6323V100C/device/goke/kunlun/system/ctcverifyboot" revision="642d4319ac239d6241116650e72955d9c15959af" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/system/gkavplayerservice" path="GK6323V100C/device/goke/kunlun/system/gkavplayerservice" revision="ec608304b4b3f92c653bbe1cb0b5389029d249a4" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/system/gpio_led" path="GK6323V100C/device/goke/kunlun/system/gpio_led" revision="7f9bed508b62a8b898a3cd280197007560683ff9" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/system/ir_user" path="GK6323V100C/device/goke/kunlun/system/ir_user" revision="abedb12f50cc9308888b4ef0c3d2012a6c1875fe" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/system/libion_ext" path="GK6323V100C/device/goke/kunlun/system/libion_ext" revision="53075c9102818108d8f445a574fd4f2867d429fd" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/system/mkbootargs" path="GK6323V100C/device/goke/kunlun/system/mkbootargs" revision="23bb8685a9dc49baf61062abf904ad613beeb270" upstream="master"/>
+  <project dest-branch="master" name="device/goke/kunlun/system/sepolicy" path="GK6323V100C/device/goke/kunlun/system/sepolicy" revision="c12bdb8a4e7b298e3914a206a60407a862567cf6" upstream="master"/>
+  <project dest-branch="master" name="device/google" path="GK6323V100C/device/google" revision="e3f1c6a66ab4b0f835cfe80b463a2d16fb8fb0e5" upstream="master"/>
+  <project dest-branch="master" name="device/sample" path="GK6323V100C/device/sample" revision="9adf4a5d41e80581b7b23359f83dc24b499027e3" upstream="master"/>
+  <project dest-branch="master" name="device/sunniwell" path="GK6323V100C/device/sunniwell" revision="5f513a1fb33ca532a38facae84c1a9856323a591" upstream="master"/>
+  <project dest-branch="master" name="external" path="GK6323V100C/external" revision="3ea81df5950b06a4689dd5e4c8bcd3eab1e632e3" upstream="master"/>
+  <project dest-branch="master" name="final_src/anhui" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/beijing" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/chongqing" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/fujian" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/gansu" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/guangdong" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/guangxi" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/guizhou" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/hainan" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/hebei" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/heilongjiang" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/henan" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/hubei" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/hunan" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/jiangsu" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/jiangxi" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/jilin" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/liaoning" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/neimenggu" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/ningxia" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/qinghai" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/shaanxi" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/shandong" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/shanghai" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/shanxi" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/sichuan" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/tianjin" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/xinjiang" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/xizang" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/yunnan" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="final_src/zhejiang" revision="eb14572cef8ddfb27315e0f1aa62a67adef3c910" upstream="master"/>
+  <project dest-branch="master" name="frameworks/av" path="GK6323V100C/frameworks/av" revision="8723a4c4e032544c90a14ad6235d6aa155c33bf2" upstream="master"/>
+  <project dest-branch="master" name="frameworks/base" path="GK6323V100C/frameworks/base" revision="bb1c4e4360681fca6d1b9fe0d8e6224f7db68e94" upstream="master"/>
+  <project dest-branch="master" name="frameworks/compile/libbcc" path="GK6323V100C/frameworks/compile/libbcc" revision="1d92b31bc8f6e66982fdc9efa38709e0c4ed10de" upstream="master"/>
+  <project dest-branch="master" name="frameworks/compile/mclinker" path="GK6323V100C/frameworks/compile/mclinker" revision="2cfac1cbb32f8454579699f240c9ca762897c7e7" upstream="master"/>
+  <project dest-branch="master" name="frameworks/compile/slang" path="GK6323V100C/frameworks/compile/slang" revision="3c7ce56e31a2f3400a9d40966a97b41625f3d786" upstream="master"/>
+  <project dest-branch="master" name="frameworks/data-binding" path="GK6323V100C/frameworks/data-binding" revision="8873865ae091f7f18bf5527513f95bb629e1415b" upstream="master"/>
+  <project dest-branch="master" name="frameworks/ex" path="GK6323V100C/frameworks/ex" revision="a846f5a88c99ea3eb5fa5cf689fc782641443a98" upstream="master"/>
+  <project dest-branch="master" name="frameworks/hardware" path="GK6323V100C/frameworks/hardware" revision="8a295600780f90f2ed6868ac4d9efa19257e711a" upstream="master"/>
+  <project dest-branch="master" name="frameworks/layoutlib" path="GK6323V100C/frameworks/layoutlib" revision="8d442124249fbeb55e95d5939e46055459169d96" upstream="master"/>
+  <project dest-branch="master" name="frameworks/minikin" path="GK6323V100C/frameworks/minikin" revision="cba23eb49f825dc672a39ed34e6e5cd97b590c62" upstream="master"/>
+  <project dest-branch="master" name="frameworks/ml" path="GK6323V100C/frameworks/ml" revision="97b896c06b481d221a9ed846f488648e1642ad9d" upstream="master"/>
+  <project dest-branch="master" name="frameworks/multidex" path="GK6323V100C/frameworks/multidex" revision="ca02ab5be8ee4394dd3ab54e4f9c46346cf42344" upstream="master"/>
+  <project dest-branch="master" name="frameworks/native" path="GK6323V100C/frameworks/native" revision="e15f255ca67ce1856a51997ce5bce60ad8fe2c5e" upstream="master"/>
+  <project dest-branch="master" name="frameworks/opt" path="GK6323V100C/frameworks/opt" revision="9f54eee084d86dd13fe5b53f45c646c7e5eedee2" upstream="master"/>
+  <project dest-branch="master" name="frameworks/rs" path="GK6323V100C/frameworks/rs" revision="eed7996e4723e0e8a26339bc50e3af8b9e065d36" upstream="master"/>
+  <project dest-branch="master" name="frameworks/support" path="GK6323V100C/frameworks/support" revision="3dc731b51d075a907710e75f739e1ca063ffa68f" upstream="master"/>
+  <project dest-branch="master" name="frameworks/wilhelm" path="GK6323V100C/frameworks/wilhelm" revision="a17c8ec8b37e3796eb5abcefe14bcb0e03c6f92b" upstream="master"/>
+  <project dest-branch="master" name="hardware/akm" path="GK6323V100C/hardware/akm" revision="ad0254d4328c1d39a3632d992a096d3d2fe7b4f0" upstream="master"/>
+  <project dest-branch="master" name="hardware/broadcom" path="GK6323V100C/hardware/broadcom" revision="be304efcbb7ae8577f61690d95b00fa866b6b450" upstream="master"/>
+  <project dest-branch="master" name="hardware/google" path="GK6323V100C/hardware/google" revision="f9016df0baea098bb47811ce515e37bcca35c67b" upstream="master"/>
+  <project dest-branch="master" name="hardware/intel" path="GK6323V100C/hardware/intel" revision="2b188e1023752f30cc5d1f305224ef0e047ac994" upstream="master"/>
+  <project dest-branch="master" name="hardware/interfaces" path="GK6323V100C/hardware/interfaces" revision="91b17aa1846c49f7de4100c1f6289fa333bd89d5" upstream="master"/>
+  <project dest-branch="master" name="hardware/invensense" path="GK6323V100C/hardware/invensense" revision="eeec0500fc32d45234ef3a510b84247478c5db75" upstream="master"/>
+  <project dest-branch="master" name="hardware/libhardware" path="GK6323V100C/hardware/libhardware" revision="dc2bdd422a3936071fb9a4df336e61ac3ca32ee0" upstream="master"/>
+  <project dest-branch="master" name="hardware/libhardware_legacy" path="GK6323V100C/hardware/libhardware_legacy" revision="5b13d68f5ad6e12e6c6e30740429dd9c6cca63cb" upstream="master"/>
+  <project dest-branch="master" name="hardware/marvell" path="GK6323V100C/hardware/marvell" revision="182ef6c8f36db5ef341af93f11cdc978d338e25d" upstream="master"/>
+  <project dest-branch="master" name="hardware/nxp" path="GK6323V100C/hardware/nxp" revision="78436214462732e29aadd0ff6d610c11def828aa" upstream="master"/>
+  <project dest-branch="master" name="hardware/qcom" path="GK6323V100C/hardware/qcom" revision="6cea6a6567ad643d881fe125e221d40a79f226f4" upstream="master"/>
+  <project dest-branch="master" name="hardware/ril" path="GK6323V100C/hardware/ril" revision="33f4438c9c7bec9a0bed9fd44af62e66041292c4" upstream="master"/>
+  <project dest-branch="master" name="kernel" path="GK6323V100C/kernel" revision="14662dbf2ddbf5e649900bdd99d60efbcc77b30d" upstream="master"/>
+  <project dest-branch="master" name="libcore" path="GK6323V100C/libcore" revision="8e03cae62ddebf5162f112fa104bfb1e2f46873d" upstream="master"/>
+  <project dest-branch="master" name="libnativehelper" path="GK6323V100C/libnativehelper" revision="322b0eed489fa6d2e1eb19ea70f92c541da6ca27" upstream="master"/>
+  <project dest-branch="2023_01_10_10_10_master" name="new_small/platform/platform_release.git" path="sdk_release" revision="d439324cf5f482cc2eff6772900fa8d2e6549482" upstream="2023_01_10_10_10_master"/>
+  <project dest-branch="master" name="packages/apps/BasicSmsReceiver" path="GK6323V100C/packages/apps/BasicSmsReceiver" revision="99f66590df7f6dcf2f9a22c0069d5dd822e92a76" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/Bluetooth" path="GK6323V100C/packages/apps/Bluetooth" revision="c502e14e699538bc53d47545f785f36d0ed1a667" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/Browser2" path="GK6323V100C/packages/apps/Browser2" revision="1e8f59e57fdc97760ac1dda57eef9e1f05fef20a" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/Calendar" path="GK6323V100C/packages/apps/Calendar" revision="fb9c5eed0e3873610d60f3e6572ca4d164425bb3" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/Camera2" path="GK6323V100C/packages/apps/Camera2" revision="bcc0e612d497e4ce7c3d729b8165775630a3bd5f" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/Car" path="GK6323V100C/packages/apps/Car" revision="0cd9c73792f021659077a22bb0dc6ac0ebd860c5" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/CarrierConfig" path="GK6323V100C/packages/apps/CarrierConfig" revision="4a80cc6b1a1ac4e97a87fe02add81b34f0598af8" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/CellBroadcastReceiver" path="GK6323V100C/packages/apps/CellBroadcastReceiver" revision="b97d8bf8e40e711258077addde424b8c29a895ff" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/CertInstaller" path="GK6323V100C/packages/apps/CertInstaller" revision="62353c4f5d7fa35b502c99362c3fe34ad964bf61" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/Contacts" path="GK6323V100C/packages/apps/Contacts" revision="c76251100aa5928c1f3d48ebdb597934f3ed7dd5" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/DeskClock" path="GK6323V100C/packages/apps/DeskClock" revision="7b07a70d7a652775f94c4bfcc0916362a5a21983" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/DevCamera" path="GK6323V100C/packages/apps/DevCamera" revision="82cd13655cffe8a359acf31467eeb243cdfa4b76" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/Dialer" path="GK6323V100C/packages/apps/Dialer" revision="0047d6383586c6a9bf0115ea61d134c85f058945" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/DocumentsUI" path="GK6323V100C/packages/apps/DocumentsUI" revision="ff2744d996d570938a5612d8e0d3ee8855ccec8b" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/Email" path="GK6323V100C/packages/apps/Email" revision="3b14acf355d46643654dee2a537e728afe1df55f" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/EmergencyInfo" path="GK6323V100C/packages/apps/EmergencyInfo" revision="5bb6e531cd106a80a74f49f3581b2997719b0c63" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/ExactCalculator" path="GK6323V100C/packages/apps/ExactCalculator" revision="9202dc066f2b7514aa7d614cceb31a51df8e45e0" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/Gallery" path="GK6323V100C/packages/apps/Gallery" revision="8b964bf4f992ed8fa5112a7ac14c5332c7c9ecb4" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/Gallery2" path="GK6323V100C/packages/apps/Gallery2" revision="b0241e417c0b9232b62136d96e452998c95d513b" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/HTMLViewer" path="GK6323V100C/packages/apps/HTMLViewer" revision="e0eda632e3f5cbc344dca9fcea9b5da7ae73bc79" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/KeyChain" path="GK6323V100C/packages/apps/KeyChain" revision="a7b85050c0a1db2f283911c5afbc990435dc9d72" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/Launcher2" path="GK6323V100C/packages/apps/Launcher2" revision="8f0d374348500067cdf4e5e6b1da7fb70b0a58a7" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/Launcher3" path="GK6323V100C/packages/apps/Launcher3" revision="17527563f0c18565aada8312e17ef580ea48d21f" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/LegacyCamera" path="GK6323V100C/packages/apps/LegacyCamera" revision="5290a3c374bda5bc2c6a20e3207350fe058ee203" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/ManagedProvisioning" path="GK6323V100C/packages/apps/ManagedProvisioning" revision="ced1445d87fc1fd7c5d27e5ce3482891a965e0b0" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/Messaging" path="GK6323V100C/packages/apps/Messaging" revision="266c02a5892eee6faf74e0baae0779d41abd8011" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/Music" path="GK6323V100C/packages/apps/Music" revision="040169993fa38ba735269b284fd8cea0f1b35b41" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/MusicFX" path="GK6323V100C/packages/apps/MusicFX" revision="49a96d035ce9b6a5d6fccb296e1e45f25b9f9cca" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/Nfc" path="GK6323V100C/packages/apps/Nfc" revision="d80506b478477e8742c61d2eda2db2ca39d11e29" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/OneTimeInitializer" path="GK6323V100C/packages/apps/OneTimeInitializer" revision="8ed18dd5083cda7ded68f3796205a3475edaa6e4" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/PackageInstaller" path="GK6323V100C/packages/apps/PackageInstaller" revision="47b3bb922eafc39f9258fe3f3d80a9fdfba524f1" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/PhoneCommon" path="GK6323V100C/packages/apps/PhoneCommon" revision="661c06dde193b99937dc8ad86c7e3ab2a8ef2e2b" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/Protips" path="GK6323V100C/packages/apps/Protips" revision="f86fb69c652b1d343d5bc7630e0e01b9706cd4cd" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/Provision" path="GK6323V100C/packages/apps/Provision" revision="7ac34879ebe0692d1b1c2ad300cf913efa901b73" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/QuickSearchBox" path="GK6323V100C/packages/apps/QuickSearchBox" revision="839da1339a269440158fbd8523af2e250b3d742c" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/SafetyRegulatoryInfo" path="GK6323V100C/packages/apps/SafetyRegulatoryInfo" revision="aacd9e2f4572fe9c8b721713c570fade0a83487e" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/SecureElement" path="GK6323V100C/packages/apps/SecureElement" revision="d7263ad819831e2b1a3fa435d3dd377f772ac190" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/Settings" path="GK6323V100C/packages/apps/Settings" revision="d2488b58213908c70a2a15867a8a1e3cca9fdc30" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/SettingsIntelligence" path="GK6323V100C/packages/apps/SettingsIntelligence" revision="92ef3c4ead9748ea40e883083de6183bbb326f81" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/SoundRecorder" path="GK6323V100C/packages/apps/SoundRecorder" revision="eb749dea76ab9e9aaf247b9a75831df91f32e552" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/SpareParts" path="GK6323V100C/packages/apps/SpareParts" revision="abb1b39b6973646496831fc32090f2193caee827" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/Stk" path="GK6323V100C/packages/apps/Stk" revision="16ea662bbcc1079c20b0b4ba3956e0963f61d6f7" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/StorageManager" path="GK6323V100C/packages/apps/StorageManager" revision="8b1fe327958529410717e7b201716675f0e08e57" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/TV" path="GK6323V100C/packages/apps/TV" revision="919cf866c9944f6cc3256d621782594ffe6a90d8" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/Tag" path="GK6323V100C/packages/apps/Tag" revision="199daa5e0b93f7590bf3b57f25d53bb4b1d87812" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/Terminal" path="GK6323V100C/packages/apps/Terminal" revision="7a3c9c7c7ed6aee36642de16d73b4a4c572bd9d1" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/Test" path="GK6323V100C/packages/apps/Test" revision="e74ccf594a1196d2d28eaaee04d917906416f3d9" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/TimeZoneData" path="GK6323V100C/packages/apps/TimeZoneData" revision="3fb566148f9321169520694f5a90c4648f66efc1" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/TimeZoneUpdater" path="GK6323V100C/packages/apps/TimeZoneUpdater" revision="edbd240a7e94718638577fb487121d88ea3b7832" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/Traceur" path="GK6323V100C/packages/apps/Traceur" revision="1077c8c32dcbd8ba045717b8ccfaad61eea101e7" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/UnifiedEmail" path="GK6323V100C/packages/apps/UnifiedEmail" revision="ecdf60139fe6d149bab0c2e66ca515b6b240a905" upstream="master"/>
+  <project dest-branch="master" name="packages/apps/WallpaperPicker" path="GK6323V100C/packages/apps/WallpaperPicker" revision="b8d89ff81d3237856e5b5f7336958c21c5f68d67" upstream="master"/>
+  <project dest-branch="master" name="packages/experimental" path="GK6323V100C/packages/experimental" revision="40b318453e735aed7cce501e2a01821fd3184382" upstream="master"/>
+  <project dest-branch="master" name="packages/inputmethods/LatinIME" path="GK6323V100C/packages/inputmethods/LatinIME" revision="d83ebdafc455fb4d3a67bbbceb4c3e58a1837c60" upstream="master"/>
+  <project dest-branch="master" name="packages/inputmethods/OpenWnn" path="GK6323V100C/packages/inputmethods/OpenWnn" revision="331aefef3a062af6a25531c0a42bcb6f26d8dcd2" upstream="master"/>
+  <project dest-branch="master" name="packages/providers/ApplicationsProvider" path="GK6323V100C/packages/providers/ApplicationsProvider" revision="6dafe4d97fa4e8abf1d5cd98feae67b5c273cb14" upstream="master"/>
+  <project dest-branch="master" name="packages/providers/BlockedNumberProvider" path="GK6323V100C/packages/providers/BlockedNumberProvider" revision="31cee9a4a917af9d3779c4a33847ba828881e1e1" upstream="master"/>
+  <project dest-branch="master" name="packages/providers/BookmarkProvider" path="GK6323V100C/packages/providers/BookmarkProvider" revision="b0bb7703342d1403e36fb3899f4cced772cd4d37" upstream="master"/>
+  <project dest-branch="master" name="packages/providers/CalendarProvider" path="GK6323V100C/packages/providers/CalendarProvider" revision="02a0f520b061d2351a489c6ef9a533135b44b4c8" upstream="master"/>
+  <project dest-branch="master" name="packages/providers/CallLogProvider" path="GK6323V100C/packages/providers/CallLogProvider" revision="600e2e375ffc0d019159fb52c4a7db4334a87184" upstream="master"/>
+  <project dest-branch="master" name="packages/providers/ContactsProvider" path="GK6323V100C/packages/providers/ContactsProvider" revision="1ec2912509102cfafdcfa64d9a12eab71d44966c" upstream="master"/>
+  <project dest-branch="master" name="packages/providers/DownloadProvider" path="GK6323V100C/packages/providers/DownloadProvider" revision="bf355ef5a2b0282850fcb8ca01b4548a1c230967" upstream="master"/>
+  <project dest-branch="master" name="packages/providers/MediaProvider" path="GK6323V100C/packages/providers/MediaProvider" revision="3b14c27426272aa5a782bf78b50eb4ac64d84199" upstream="master"/>
+  <project dest-branch="master" name="packages/providers/PartnerBookmarksProvider" path="GK6323V100C/packages/providers/PartnerBookmarksProvider" revision="df11adef58053ca82dfb21c28f64787b640a19dc" upstream="master"/>
+  <project dest-branch="master" name="packages/providers/TelephonyProvider" path="GK6323V100C/packages/providers/TelephonyProvider" revision="449c0b4f8da21f4eb9b229b97f421f418ffe367e" upstream="master"/>
+  <project dest-branch="master" name="packages/providers/TvProvider" path="GK6323V100C/packages/providers/TvProvider" revision="ef50450d7a0bfaf1e916796ac9bd195642ca110f" upstream="master"/>
+  <project dest-branch="master" name="packages/providers/UserDictionaryProvider" path="GK6323V100C/packages/providers/UserDictionaryProvider" revision="6d38bd6f02c750ca68768a2eed9aa199a8f56694" upstream="master"/>
+  <project dest-branch="master" name="packages/screensavers/Basic" path="GK6323V100C/packages/screensavers/Basic" revision="8ed80384e1cddf41d9f3ccdc7a4862683f249615" upstream="master"/>
+  <project dest-branch="master" name="packages/screensavers/PhotoTable" path="GK6323V100C/packages/screensavers/PhotoTable" revision="eb41d322ce9adab5d94f7729ee5398613faf2b93" upstream="master"/>
+  <project dest-branch="master" name="packages/screensavers/WebView" path="GK6323V100C/packages/screensavers/WebView" revision="8e6c429e1d13650d1f0420226671c979509c8188" upstream="master"/>
+  <project dest-branch="master" name="packages/services/BuiltInPrintService" path="GK6323V100C/packages/services/BuiltInPrintService" revision="71b6d551f7d0c5d7074edf5fb09a9f7234a34bf0" upstream="master"/>
+  <project dest-branch="master" name="packages/services/Car" path="GK6323V100C/packages/services/Car" revision="c7497442613df83ab77c7eb1329f47bf3114b6ba" upstream="master"/>
+  <project dest-branch="master" name="packages/services/Mms" path="GK6323V100C/packages/services/Mms" revision="53d3617a954aae23893d895e9989f84cce066eb4" upstream="master"/>
+  <project dest-branch="master" name="packages/services/Telecomm" path="GK6323V100C/packages/services/Telecomm" revision="c7b222e4c81a2759b5deeedd17d23023b7474ea5" upstream="master"/>
+  <project dest-branch="master" name="packages/services/Telephony" path="GK6323V100C/packages/services/Telephony" revision="d7b2f86f39ad7b01ba7a4be8ee69f2327ab4219a" upstream="master"/>
+  <project dest-branch="master" name="packages/wallpapers/LivePicker" path="GK6323V100C/packages/wallpapers/LivePicker" revision="a1f34f109398fac4a750d17e62fcd1ca71e6d795" upstream="master"/>
+  <project dest-branch="master" name="pdk" path="GK6323V100C/pdk" revision="9a080acb00b4d2aced422543dc448f1c3d0e5f54" upstream="master"/>
+  <project dest-branch="master" name="platform_testing" path="GK6323V100C/platform_testing" revision="89abfcb9217195a68712f9c3f7ee437cc73adeb4" upstream="master"/>
+  <project dest-branch="master" name="prebuilts" path="GK6323V100C/prebuilts" revision="436f6450006b20c1f81935abea4d855b58d1094d" upstream="master"/>
+  <project dest-branch="master" name="sdk" path="GK6323V100C/sdk" revision="9a8924dcb45ed98db5dc2d0c79eb83016effbf63" upstream="master"/>
+  <project dest-branch="master" name="sdk_build" revision="d401c39072714abbe9dd328486071d1126a3c7f4" upstream="master">
+    <linkfile dest="GK6323V100C/build.sh" src="build.sh"/>
+  </project>
+  <project dest-branch="master" name="sdk_src/anhui" revision="b8c23b46d94dbdf19f56f0ebe2beab25cda0a262" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/beijing" revision="5ac177f62524173384d701004d5fb532bc205f96" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/chongqing" revision="b8c23b46d94dbdf19f56f0ebe2beab25cda0a262" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/fujian" revision="b8c23b46d94dbdf19f56f0ebe2beab25cda0a262" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/gansu" revision="b8c23b46d94dbdf19f56f0ebe2beab25cda0a262" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/guangdong" revision="5795f91fbfa77500ac98508aa26c3dc05aa0d865" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/guangxi" revision="be3d0a5e8332757d01129b66295231a2a7d60e91" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/guizhou" revision="b8c23b46d94dbdf19f56f0ebe2beab25cda0a262" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/hainan" revision="d9a7009033c14fecdc833a52b316c47d5b8e57e8" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/hebei" revision="b8c23b46d94dbdf19f56f0ebe2beab25cda0a262" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/heilongjiang" revision="2cec41ddce682f39c43982b30cfef8ad128f0888" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/henan" revision="5dab49d0f9cd68bb03f1f9b1e2405e9b06a9c3f8" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/hubei" revision="266e0a635a0a32aca4fe52ddcee1a403d506eab7" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/hunan" revision="5477e4ab616b5e0be3573e716e4178dd116fe17a" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/jiangsu" revision="b8b7faab149ac51f93f098fbd34da4f2607652f4" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/jiangxi" revision="d897d17a6c464b5bf06048faf183a936337ca024" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/jilin" revision="a0dea1d819eff0e65451c099a1a51039768119b9" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/liaoning" revision="b8c23b46d94dbdf19f56f0ebe2beab25cda0a262" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/neimenggu" revision="b8c23b46d94dbdf19f56f0ebe2beab25cda0a262" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/ningxia" revision="b8c23b46d94dbdf19f56f0ebe2beab25cda0a262" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/qinghai" revision="5636457bc44efefceec142c417dd4f2e11391802" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/shaanxi" revision="b8c23b46d94dbdf19f56f0ebe2beab25cda0a262" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/shandong" revision="2702ce24301a7609a84d54dac71b09ba3730bd13" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/shanghai" revision="b8c23b46d94dbdf19f56f0ebe2beab25cda0a262" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/shanxi" revision="436645a29f6a7b0794ff97b385b06f4cc111852b" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/sichuan" revision="7d7e9ff1164e7b746d3df403cb4dcbf5830b5666" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/tianjin" revision="b8c23b46d94dbdf19f56f0ebe2beab25cda0a262" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/xinjiang" revision="b8c23b46d94dbdf19f56f0ebe2beab25cda0a262" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/xizang" revision="b8c23b46d94dbdf19f56f0ebe2beab25cda0a262" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/yunnan" revision="fbd913415dc9d167d9a604a1cf2ca1668450dcc1" upstream="master"/>
+  <project dest-branch="master" name="sdk_src/zhejiang" revision="37586778883f18639b66a4d231e55a7c6ef45d00" upstream="master"/>
+  <project dest-branch="master" name="system/bt" path="GK6323V100C/system/bt" revision="4ec7c5953d5d46463c0626d195ffc670ad1a560f" upstream="master"/>
+  <project dest-branch="master" name="system/ca-certificates" path="GK6323V100C/system/ca-certificates" revision="afbddc44902cb87d331a01449f36a4b8f83c225c" upstream="master"/>
+  <project dest-branch="master" name="system/chre" path="GK6323V100C/system/chre" revision="d680bbe65df7f25c08d0969475750d97d6900db3" upstream="master"/>
+  <project dest-branch="master" name="system/connectivity" path="GK6323V100C/system/connectivity" revision="a17ee923342bcbce8a36b8daf8a76df1beeedd1e" upstream="master"/>
+  <project dest-branch="master" name="system/core" path="GK6323V100C/system/core" revision="cf15eb39ac55495bcdc2e80a265ec971443e055b" upstream="master"/>
+  <project dest-branch="master" name="system/extras" path="GK6323V100C/system/extras" revision="edb83317b9b9a94b50298e7b4971666bd0a5f444" upstream="master"/>
+  <project dest-branch="master" name="system/gatekeeper" path="GK6323V100C/system/gatekeeper" revision="ce4162fdb91d8e1d739bad6b8e72bb42efcddfa6" upstream="master"/>
+  <project dest-branch="master" name="system/hardware" path="GK6323V100C/system/hardware" revision="f8950da707441873b5dc89031a38cb3d4f0f8242" upstream="master"/>
+  <project dest-branch="master" name="system/hwservicemanager" path="GK6323V100C/system/hwservicemanager" revision="84aad798ba88f2548220f07dca44f7e5d763ed8e" upstream="master"/>
+  <project dest-branch="master" name="system/iot" path="GK6323V100C/system/iot" revision="88f6ca06d06587be9b768534d9a77a7368c4d476" upstream="master"/>
+  <project dest-branch="master" name="system/keymaster" path="GK6323V100C/system/keymaster" revision="2f2a55f1a638fc24bed90a438e37d6da022f9d61" upstream="master"/>
+  <project dest-branch="master" name="system/libfmq" path="GK6323V100C/system/libfmq" revision="7b76e598e7df742068725d0b9934c86e3e3c0f6a" upstream="master"/>
+  <project dest-branch="master" name="system/libhidl" path="GK6323V100C/system/libhidl" revision="106b657b95f3484f4f1c72f9b774ef7c6cb3cf7c" upstream="master"/>
+  <project dest-branch="master" name="system/libhwbinder" path="GK6323V100C/system/libhwbinder" revision="ec582889428b7ca54b36422dd63936e57479acda" upstream="master"/>
+  <project dest-branch="master" name="system/libufdt" path="GK6323V100C/system/libufdt" revision="a7b1673aacb45acd202df551a8a57d751bc3f2f6" upstream="master"/>
+  <project dest-branch="master" name="system/libvintf" path="GK6323V100C/system/libvintf" revision="fc9dbb421c0c418deae8793c205e92984361f778" upstream="master"/>
+  <project dest-branch="master" name="system/media" path="GK6323V100C/system/media" revision="8c86acd9e1adc848343dbc5908578fb3d051a1d8" upstream="master"/>
+  <project dest-branch="master" name="system/netd" path="GK6323V100C/system/netd" revision="b0af652da940a7e2a4dae7caa1d93e043533ce2f" upstream="master"/>
+  <project dest-branch="master" name="system/nfc" path="GK6323V100C/system/nfc" revision="44ad634f4ed9f7757f7a13012fdf8385cefb688f" upstream="master"/>
+  <project dest-branch="master" name="system/nvram" path="GK6323V100C/system/nvram" revision="57dcb367004ebc2253efa6b8c9c94eeaa73f530f" upstream="master"/>
+  <project dest-branch="master" name="system/security" path="GK6323V100C/system/security" revision="37a4a2acdbafbf9449d2543eefd474721644684b" upstream="master"/>
+  <project dest-branch="master" name="system/sepolicy" path="GK6323V100C/system/sepolicy" revision="db26c21dc0207fef79ad0b9f146130d4ff101fee" upstream="master"/>
+  <project dest-branch="master" name="system/timezone" path="GK6323V100C/system/timezone" revision="7cc8e58e43cc0fb0cc075465cdd6dcac536bb138" upstream="master"/>
+  <project dest-branch="master" name="system/tools" path="GK6323V100C/system/tools" revision="f01823b4101dbfc59a96740c55be6fd3ab0ea821" upstream="master"/>
+  <project dest-branch="master" name="system/tpm" path="GK6323V100C/system/tpm" revision="fec6196b12bbf28d9f7500dabfb8e2d1fd2b009c" upstream="master"/>
+  <project dest-branch="master" name="system/update_engine" path="GK6323V100C/system/update_engine" revision="7344f664fe7e25db9213012e87cab1a1afb4076a" upstream="master"/>
+  <project dest-branch="master" name="system/vold" path="GK6323V100C/system/vold" revision="fe5acab92cc4e1ea1ab4b8f7b08cb5edab0313ba" upstream="master"/>
+  <project dest-branch="master" name="test" path="GK6323V100C/test" revision="5dcc3f76d381658c303da52ffb0296f6530c3f6a" upstream="master"/>
+  <project dest-branch="master" name="toolchain" path="GK6323V100C/toolchain" revision="c5f7098cfcfeef26becffdfd582f42c524b6eb8f" upstream="master"/>
+  <project dest-branch="master" name="tools" path="GK6323V100C/tools" revision="537114897f28c2a7bf4e2fd4175a776bac7674c9" upstream="master"/>
+</manifest>

@@ -1,0 +1,46 @@
+EXT4 superblock info:
+
+Filesystem volume name:    system
+Last mounted on:           /tmp/rebuild/mnt
+Filesystem UUID:           DA594C53-9BEB-F85C-85C5-CEDF76546F7A
+Filesystem magic number:   0xEF53
+Filesystem revision:       1 (v2 format/dynamic inode sizes)
+FS compatible features:    0x00000018 (EXT_ATTR RESIZE_INODE)
+FS incompatible features:  0x00000042 (FILETYPE EXTENTS)
+FS read-only features:     0x00000013 (SPARSE_SUPER LARGE_FILE GDT_CSUM)
+Filesystem flags:          Unsigned directory hash in use
+Default mount options:     0x00000000 (none)
+Filesystem state:          Cleanly umounted
+Errors behavior:           Remount read-only
+Filesystem OS type:        Linux
+Inode count:               96000
+Block count:               384000
+Reserved block count:      0
+Free blocks:               146746
+Free inodes:               93715
+First data block:          0
+Block size:                4096
+Fragment size:             4096
+Reserved GDT blocks:       95
+Blocks per group:          32768
+Fragments per group:       32768
+Inodes per group:          8000
+Inode blocks per group:    500
+Last mount time:           06.06.2026 18:48:38
+Last write time:           06.06.2026 18:48:48
+Mount count:               0
+Maximum mount count:       -1
+Last checked:              06.06.2026 18:48:48
+Check interval:            0
+Reserved blocks uid:       0 (user unknown)
+Reserved blocks gid:       0 (group unknown)
+First inode:               11
+Inode size:                256
+Journal superblock UUID:   00000000-0000-0000-0000-000000000000
+Journal inode:             0
+Journal device number:     0x00000000
+Default directory hash:    Tea.
+Directory Hash Seed:       00000000-0000-0000-0000-000000000000
+Journal inode backup type: 0x01 (EXT3_JNL_BACKUP_BLOCKS)
+
+Output information about the superblock of system.img finish success

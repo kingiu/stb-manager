@@ -1,0 +1,3 @@
+p,startup_1.jpg,5,jpg
+p,startup_2.jpg,5,jpg
+p,startup_3.jpg,5,jpg

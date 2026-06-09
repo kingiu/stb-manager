@@ -1,0 +1,1 @@
+make_ext4fs -l 314572800 -s -J -T 1781011302 -L vendor -a vendor -S "./config\vendor_file_contexts.txt" -C "./config\vendor_fs_config.txt" "../vendor.img" "./vendor"

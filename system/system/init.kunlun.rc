@@ -1,0 +1,311 @@
+# init.rc import /init.${ro.hardware}.rc
+# Don't access vendor-specific files/properties in this rc file.
+
+# on init
+# on early-fs
+# on fs
+# on post-fs
+on post-fs-data
+    #create for dhcp
+    mkdir /data/misc/dhcp 0770 dhcp dhcp
+    chmod 0770 /data/misc/dhcp
+    mkdir /data/ppp 0770 radio radio
+    chmod 0770 /data/ppp
+
+    #create for samba
+    mkdir /data/netshare 0700 system system
+
+    # TODO create dtv data for platform
+    # mkdir /data/dtvdata 0770 system system
+
+    # FIXME see initrc/atrace.rc
+    # chmod 777 /sys/kernel/debug/tracing/trace_marker
+
+    # bluetooth
+    # change back to bluetooth from system
+    chown bluetooth net_bt_admin /data/misc/bluetooth
+    mkdir /data/misc/bluedroid 0770 bluetooth net_bt_admin
+    # bluetooth LPM
+    chown bluetooth net_bt_admin /proc/bluetooth/sleep/lpm
+    chown bluetooth net_bt_admin /proc/bluetooth/sleep/btwrite
+    # UART device
+    chmod 0660 {/dev/ttyAMA1}
+    chown bluetooth net_bt_admin {/dev/ttyAMA1}
+    chmod 0660 {/dev/rtk_btusb}
+    chown bluetooth net_bt_admin {/dev/rtk_btusb}
+    # rfkill
+    chmod 0660 /sys/class/rfkill/rfkill0/state
+    chmod 0660 /sys/class/rfkill/rfkill0/type
+    chown bluetooth net_bt_admin /sys/class/rfkill/rfkill0/state
+    chown bluetooth net_bt_admin /sys/class/rfkill/rfkill0/type
+    write /sys/class/rfkill/rfkill0/state 0
+
+    # bluetooth MAC address programming
+    chown bluetooth net_bt_admin ro.bt.bdaddr_path
+    chown bluetooth net_bt_admin /system/etc/bluetooth
+    chown bluetooth net_bt_admin /data/misc/bluetooth
+    # setprop ro.bt.bdaddr_path "/data/misc/bluetooth/bdaddr"
+
+    # add privilage for smtest
+    chmod 0666 /dev/gk_cipher
+
+# on early-boot
+on boot
+    # According to cts testcase changes: fbd00778, we remove /proc/interrupts and /proc/stat read permission.
+    ifup eth0
+    chmod 0440 /proc/interrupts
+
+    # add support for multiple storage media
+    setprop service.vold.status Normal
+    setprop service.mountservice.reset 0
+    # add SoftAP support
+    setprop ro.tether.denied false
+
+service ipconflict_eth0 /system/bin/ipconflict
+    class main
+    disabled
+    oneshot
+
+service ipconflict_eth1 /system/bin/ipconflict
+    class main
+    disabled
+    oneshot
+
+service ipconflict_wlan0 /system/bin/ipconflict
+    class main
+    disabled
+    oneshot
+
+# pppoe
+service pppoe_conn_eth0 /system/etc/ppp/ppp.connect
+    class main
+    user  root
+    group system radio vpn
+    disabled
+    oneshot
+service pppoe_conn_eth1 /system/etc/ppp/ppp.connect
+    class main
+    user  root
+    group system radio vpn
+    disabled
+    oneshot
+service pppoe_conn_wlan0 /system/etc/ppp/ppp.connect
+    class main
+    user  root
+    group system radio vpn
+    disabled
+    oneshot
+service pppoe_disconn /system/etc/ppp/ppp.disconnect
+    class main
+    user  root
+    group system radio
+    disabled
+    oneshot
+
+#doublevlan
+service vlan_start /system/etc/vlan/vlan.start
+    class main
+    user  root
+    group system radio vpn
+    disabled
+    oneshot
+service vlan_stop /system/etc/vlan/vlan.stop
+    class main
+    user  root
+    group system radio vpn
+    disabled
+    oneshot
+
+# ipv6 start
+service dhclient_eth0 /system/bin/dhclient -lf /data/misc/dhcp/dhclient6_eth0.leases -D LL -6 -nw -d eth0 --dad-wait-time 5
+    group system dhcp wifi shell
+    disabled
+    oneshot
+
+service dhclient_vlan /system/bin/dhclient -6 -nw -d eth0.85
+    group system dhcp wifi
+    disabled
+    oneshot
+
+service dhclient_eth1 /system/bin/dhclient -lf /data/misc/dhcp/dhclient6_eth1.leases -D LL -6 -nw -d eth1
+    group system dhcp wifi shell
+    disabled
+    oneshot
+
+service dhclient_wlan0 /system/bin/dhclient -lf /data/misc/dhcp/dhclient6_wlan0.leases -D LL -6 -nw -d wlan0 
+    group system dhcp wifi shell
+    disabled
+    oneshot
+
+service dhclient_ppp0 /system/bin/dhclient -lf /data/misc/dhcp/dhclient6_ppp0.leases -D LL -6 -nw -d ppp0
+    group system dhcp wifi shell
+    disabled
+    oneshot
+
+service release_eth0 /system/bin/dhclient -lf /data/misc/dhcp/dhclient6_eth0.leases -D LL -6 -r eth0
+    group system dhcp wifi shell
+    disabled
+    oneshot
+
+
+service release_vlan /system/bin/dhclient -lf /data/misc/dhcp/dhclient6_vlan.leases -D LL -6 -r eth0.85
+    group system dhcp wifi shell
+    disabled
+    oneshot
+
+service release_eth1 /system/bin/dhclient -lf /data/misc/dhcp/dhclient6_eth1.leases -D LL -6 -r eth1
+    group system dhcp wifi shell
+    disabled
+    oneshot
+
+service release_wlan0 /system/bin/dhclient -lf /data/misc/dhcp/dhclient6_wlan0.leases -D LL -6 -r wlan0
+    group system dhcp wifi shell
+    disabled
+    oneshot
+
+service release_ppp0 /system/bin/dhclient -lf /data/misc/dhcp/dhclient6_wlan0.leases -D LL -6 -r ppp0
+    group system dhcp wifi shell
+    disabled
+    oneshot
+
+# Add for get dns
+service dhclientDns /system/bin/dhclient -6 -S
+    group system dhcp wifi shell
+    disabled
+    oneshot
+
+service dhclientDns_eth0 /system/bin/dhclient -6 -S -lf /data/misc/dhcp/dhclient6_eth0.leases -D LL eth0
+    group system dhcp wifi shell
+    disabled
+    oneshot
+
+service dhclientDns_eth1 /system/bin/dhclient -6 -S -lf /data/misc/dhcp/dhclient6_eth1.leases -D LL eth1
+    group system dhcp wifi shell
+    disabled
+    oneshot
+
+service dhclientDns_wlan0 /system/bin/dhclient -6 -S -lf /data/misc/dhcp/dhclient6_wlan0.leases -D LL wlan0
+    group system dhcp wifi shell
+    disabled
+    oneshot
+
+service dhclientDns_ppp0 /system/bin/dhclient -6 -S -lf /data/misc/dhcp/dhclient6_ppp0.leases -D LL ppp0
+    group system dhcp wifi shell
+    disabled
+    oneshot
+
+service dhclientDns_vlan /system/bin/dhclient -6 -S
+    group system dhcp wifi shell
+    disabled
+    oneshot
+
+# Stateless auto config
+on property:persist.sys.ipv6.slaac.eth0=true
+    write /proc/sys/net/ipv6/conf/eth0/autoconf 1
+
+on property:persist.sys.ipv6.slaac.eth0=false
+    write /proc/sys/net/ipv6/conf/eth0/autoconf 0
+
+# wifi Stateless auto config
+on property:persist.sys.ipv6.slaac.wlan0=true
+    write /proc/sys/net/ipv6/conf/wlan0/autoconf 1
+
+on property:persist.sys.ipv6.slaac.wlan0=false
+    write /proc/sys/net/ipv6/conf/wlan0/autoconf 0
+
+# ipv6 end
+
+# gk-agent: MQTT-based remote management & OTA agent
+service gk-agent /system/bin/gk-agent
+    class main
+    user root
+    group root net_bt_admin
+    disabled
+    oneshot
+
+# add gkaoservice
+service gkaoservice /system/bin/gkaoservice
+    class main
+    user  system
+    group root
+
+# add gkbdserver
+service gkbdserver /system/bin/gkbdserver
+    class main
+    user  system
+    group system audio media media_rw
+
+# add gkkaraokeservice
+service gkkaraokeservice /system/bin/gkkaraokeservice
+    class main
+    user  root
+    group root
+
+# add gknetshare
+service netshared /system/bin/netshared
+    class main
+    user  root
+    group root
+
+# add gkmultiscreen
+service multiscreenserver /system/bin/multiscreenserver
+    class main
+    user system
+    group system inet
+
+# TODO to be removed
+# service frontPanel /system/bin/frontPanel
+#    class main
+#    user root
+#    group root
+
+# bootvideo
+#service bootvideo /system/bin/bootvideo
+#    priority -20
+#    class core
+#    user root
+#    group system graphics input root
+#    oneshot
+
+# add tntfs_gk.ko
+    insmod /vendor/lib/modules/tntfs_gk.ko
+
+on property:prop.rmbtdriver.enable=true
+    start rmbtdriver
+on property:prop.rmbtdriver.enable=false
+    start rmbtdriver
+
+service rmbtdriver /vendor/bin/rmbtdriver.sh
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:rmbtdriver:s0
+
+on property:sys.boot_completed=1
+    start IptvService
+    start amtprox
+
+service IptvService /system/bin/IptvService
+    class main
+    group system
+    user root
+
+service amtprox /system/bin/amtprox
+    class main
+    user root
+    group root system
+
+service swiperf_setup /vendor/bin/swiperf.sh
+    class core
+    user root
+    group root
+    oneshot
+    seclabel u:r:shell:s0
+
+on property:sys.start.console=0
+    stop console
+
+on property:sys.start.console=1
+    start console
+

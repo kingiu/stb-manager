@@ -1,0 +1,41 @@
+#数据存放到system表中
+#数据存放到secure表中
+[secure]
+home_page=http://bngt.itv.cmvideo.cn:8095
+home_page2=http://ips.itv.cmvideo.cn
+upgrade_url=http://tview.itv.cmvideo.cn:80/ACSServlet
+apk_check_url=http://appcontrol.itv.cmvideo.cn:8095/aics-authorize/authorize
+#优先访问网络; 4 IPv4, 6 IPv6; 默认值为 6
+default_network_priority=6
+ntp_server=cn.pool.ntp.org
+ntp_server2=221.181.100.40
+#视频比例; 0 自适应, 1 拉伸全屏; 默认为 1
+default_screen_ratio=1
+#清晰度; 0 清晰度优先, 1 流畅优先, 2 自动切换; 默认为0
+default_player_quality=0
+#音频是否透传; 0 不透传, 1 透传; 默认 0
+spdif_passthrough=0
+#音频是否透传; 0 不透传, 1 透传; 默认 0
+hdmi_passthrough=0
+#电视待机后通知机顶盒待机; 0 关闭, 1 开启; 默认 1
+cec_tv_to_stb=1
+#终端是否禁用 wif 功能; 0 不禁用, 1禁用; 默认 0; sys.settings.support.net.flags 为 1、3、5、7时生效
+cmcc_wifi_disabled=0
+#终端是否禁用蓝牙功能; 0 不禁用, 1禁用; 默认 0; sys.settings.support.bluetooth 为1 时生效
+cmcc_bluetooth_disabled=0
+#dlna服务; 0 关闭, 1 开启; 默认为 1
+dlna_enable=1
+#安装权限; 0 禁止, 1 允许; (注: ro.product.type 为1 时才使用此参数)
+install_non_market_apps=1
+#休眠时间; 整数<=0 不启动休眠单位毫秒; 默认 -1
+sleep_time=-1
+#进入诊断是否需要密码，可根据冬省需求决定是否启动; 0: 关闭, 1:打开; 默认 0
+diagnose_pwdprotected=0
+#开机延迟启动时长 0-999 单位秒; 注: <0 按0处理, >999 按999处理; 默认为 0
+delay_start_systime=0
+#自动待机提醒时间; -1 关闭自动待机, 0-23 该时间开始一小时内; 默认为 3
+sys.settings.autoshutdown_time=3
+#数据存放到global表中
+[global]
+#cec待机
+hdmi_control_enabled=1

@@ -1,0 +1,4 @@
+service hwandroidmediahal-1-0 /vendor/bin/hw/vendor.goke.hardware.hwandroidmediahal@1.0-service
+    class hal
+    user root
+    group root audio media media_rw system

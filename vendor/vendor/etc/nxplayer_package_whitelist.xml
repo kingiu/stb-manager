@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<nxplayer>
+    <!--
+        for example to use nuplayer, set gkvideoplayer to use nuplayer
+        <PackageName>oid.videoplayer</PackageName>
+    -->
+</nxplayer>

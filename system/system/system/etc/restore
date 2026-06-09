@@ -1,0 +1,19 @@
+#!/system/bin/sh
+
+RESTORE_DEVICE=${DEVICE:0:7}
+
+echo "RESTORE_DEVICE=${RESTORE_DEVICE}" > /dev/kmsg
+
+if [[ "${RESTORE_DEVICE}" == "mmcblk0" && "${FS}" == "ext4" ]]; then
+	echo "EXT4 on Dev ${DEVICE} error !! Enter wipe_data" > /dev/kmsg
+	mkdir cache/recovery
+	chmod 0770 /cache/recovery
+	/system/bin/write_raw misc wipe_data
+fi
+
+if [ "${FS}" == "ubifs" ]; then
+	echo "UBIFS on Dev ${DEVICE} error !! Enter wipe_data" > /dev/kmsg
+	mkdir cache/recovery
+	chmod 0770 /cache/recovery
+	/system/bin/write_raw misc wipe_data
+fi

@@ -1,0 +1,35 @@
+# Large binary images
+*.img
+*.dat
+*.dat.br
+*.patch.dat
+
+# Zip files
+*.zip
+
+# Binary agents/build artifacts
+remote-manager/agent/gk-agent-arm
+remote-manager/agent/gk-agent
+remote-manager/server/stb-manager
+remote-manager/server/stb-manager-linux-amd64
+remote-manager/server/stb-manager-x86_64
+remote-manager/server/stb-manager
+
+# Go mod/sum should be tracked, but binaries should not
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build output
+*.exe
+*.o
+*.a
+*.so

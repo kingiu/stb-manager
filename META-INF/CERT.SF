@@ -1,0 +1,67 @@
+Signature-Version: 1.0
+Created-By: 1.0 (Android SignApk)
+SHA1-Digest-Manifest: SwOGVcV/pKE+s3u0kEcm2usD0zQ=
+
+Name: META-INF/com/google/android/updater-script
+SHA1-Digest-Manifest: ShcBqiyAyxikSyaFf09qy512QCw=
+
+Name: META-INF/com/google/android/update-binary
+SHA1-Digest-Manifest: rBeYVNJDvOeF6ZcR1mBLCXotIXU=
+
+Name: vendor.patch.dat
+SHA1-Digest-Manifest: FGxh8AKe7Jf6bDNWX6tLn6TB/xA=
+
+Name: dtbo.img
+SHA1-Digest-Manifest: 2Nx5avk1nqLO9CN5YeIwEVpPaGA=
+
+Name: logo.img
+SHA1-Digest-Manifest: KECLRgQXXJx//g619Jf1igE0kEI=
+
+Name: system.patch.dat
+SHA1-Digest-Manifest: 774VWw1Wa8Y+IPKHHCeM6N//yzE=
+
+Name: vendor.new.dat.br
+SHA1-Digest-Manifest: zwcY3U0rkMf7bl8Ec7YjEVMLQ8w=
+
+Name: system.transfer.list
+SHA1-Digest-Manifest: GvKPfPIAcyksi2ovdDOr1UCP8UY=
+
+Name: boot.img
+SHA1-Digest-Manifest: 6ElT9YhxQjmE72xxdYK4gf0l5jo=
+
+Name: bootargs.img
+SHA1-Digest-Manifest: hNXqHWc3jGQ1Q/JFpyc25jeLWzY=
+
+Name: vendor.transfer.list
+SHA1-Digest-Manifest: YoZ4N9tim0dTzuP92lghUiesxWY=
+
+Name: system.new.dat.br
+SHA1-Digest-Manifest: F+DgEhLEQhvOryt3ffFAsoPg4dg=
+
+Name: bootargsbak.img
+SHA1-Digest-Manifest: GCswvWKs2UKvQGZZ8xTrSLe6n80=
+
+Name: META-INF/com/android/metadata
+SHA1-Digest-Manifest: dZJ0Ife1bXI1ZluOIhrm0QhQUSE=
+
+Name: cache.img
+SHA1-Digest-Manifest: UhSCPD0VJMXmNGDqokoN/bojRwU=
+
+Name: bl31.img
+SHA1-Digest-Manifest: VhRl5L+MABqAp47CMRCFswQ0OVA=
+
+Name: fastboot.img
+SHA1-Digest-Manifest: snWfdxvvXplbjmNyH6Eg68EYZSc=
+
+Name: recoverybak.img
+SHA1-Digest-Manifest: QpvpmsvE5XwLuhfdPVc2rCqS1vo=
+
+Name: recovery.img
+SHA1-Digest-Manifest: wPPJPxFO3Qz0WLrO2UlGy/k/7dk=
+
+Name: userdata.img
+SHA1-Digest-Manifest: 2e4bCR4um5vptHKsgS/UBMEQFg4=
+
+Name: pqparam.img
+SHA1-Digest-Manifest: TyUp1mCziadZoEprisFebWo2lCk=
+

@@ -1,0 +1,7 @@
+#for userdata resize2fs
+service userdata_resize /vendor/bin/userdata.resize.sh
+    class main
+    user root
+    group root
+    oneshot
+    seclabel u:r:userdata_resize:s0

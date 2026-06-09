@@ -1,0 +1,105 @@
+on early-init
+    # Linux's execveat() syscall may construct paths containing /dev/fd
+    # expecting it to point to /proc/self/fd
+    symlink /proc/self/fd /dev/fd
+
+    # set RLIMIT_NICE to allow priorities from 19 to -20
+    setrlimit nice 40 40
+
+    # Allow up to 32K FDs per process
+    setrlimit nofile 32768 32768
+
+    symlink /system/vendor /vendor
+
+    mount_all /fstab.data
+    # We chown/chmod /data again so because mount is run as root + defaults
+    chown system system /data
+    chmod 0771 /data
+    # We restorecon /data in case the userdata partition has been reset
+    restorecon /data
+
+    # load_system_props # need run load_system_props here in commercial version
+
+    start netd
+
+    # Create cgroup mount points for process groups
+    mkdir /dev/cpuctl
+    mount cgroup none /dev/cpuctl nodev noexec nosuid cpu
+    chown system system /dev/cpuctl
+    chown system system /dev/cpuctl/tasks
+    chmod 0666 /dev/cpuctl/tasks
+    write /dev/cpuctl/cpu.rt_period_us 1000000
+    write /dev/cpuctl/cpu.rt_runtime_us 950000
+
+    # sets up initial cpusets for ActivityManager
+    mkdir /dev/cpuset
+    mount cpuset none /dev/cpuset nodev noexec nosuid
+    # this ensures that the cpusets are present and usable, but the device's
+    # init.rc must actually set the correct cpus
+    mkdir /dev/cpuset/foreground
+    copy /dev/cpuset/cpus /dev/cpuset/foreground/cpus
+    copy /dev/cpuset/mems /dev/cpuset/foreground/mems
+    chown system system /dev/cpuset
+    chown system system /dev/cpuset/foreground
+    mkdir /data/dalvik-cache 0771 root root
+    mkdir /data/property 0700 root root
+
+    start zygote
+
+    load_system_props
+    load_persist_props
+
+    # Create cgroup mount points for process groups
+    mkdir /dev/cpuset/background
+    copy /dev/cpuset/cpus /dev/cpuset/background/cpus
+    copy /dev/cpuset/mems /dev/cpuset/background/mems
+    # system-background is for system tasks that should only run on
+    # little cores, not on bigs
+    # to be used only by init, so don't change system-bg permissions
+    mkdir /dev/cpuset/system-background
+    copy /dev/cpuset/cpus /dev/cpuset/system-background/cpus
+    copy /dev/cpuset/mems /dev/cpuset/system-background/mems
+    # restricted is for system tasks that are being throttled
+    # due to screen off.
+    mkdir /dev/cpuset/restricted
+    copy /dev/cpuset/cpus /dev/cpuset/restricted/cpus
+    copy /dev/cpuset/mems /dev/cpuset/restricted/mems
+    mkdir /dev/cpuset/top-app
+    copy /dev/cpuset/cpus /dev/cpuset/top-app/cpus
+    copy /dev/cpuset/mems /dev/cpuset/top-app/mems
+
+    # change permissions for all cpusets we'll touch at runtime
+    chown system system /dev/cpuset/background
+    chown system system /dev/cpuset/system-background
+    chown system system /dev/cpuset/top-app
+    chown system system /dev/cpuset/restricted
+    # set system-background to 0775 so SurfaceFlinger can touch it
+    chmod 0775 /dev/cpuset/system-background
+
+    # Create energy-aware scheduler tuning nodes
+    mkdir /dev/stune
+    mount cgroup none /dev/stune nodev noexec nosuid schedtune
+    mkdir /dev/stune/foreground
+    mkdir /dev/stune/background
+    mkdir /dev/stune/top-app
+    mkdir /dev/stune/rt
+    chown system system /dev/stune
+    chown system system /dev/stune/foreground
+    chown system system /dev/stune/background
+    chown system system /dev/stune/top-app
+    chown system system /dev/stune/rt
+
+    # start logd
+    start servicemanager
+    start hwservicemanager
+    start vndservicemanager
+
+    start vendor.gralloc-2-0
+    start vendor.configstore-hal
+    start vendor.hwcomposer-2-2
+    start hwgraphics-1-0
+    start surfaceflinger
+	start swRootService
+
+    mkdir /data/misc 01771 system misc
+    mkdir /data/misc/keystore 0700 keystore keystore

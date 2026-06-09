@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    non hdcp mode:        set hdcp = 1
+    dx hdcp mode:          set hdcp = 2     // not support any longer
+    goke hdcp mode:  set hdcp = 3
+-->
+
+<miracast>
+    <name>non hdcp</name>
+    <mode>1</mode>
+</miracast>

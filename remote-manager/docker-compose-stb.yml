@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  stb-manager:
+    image: busybox:stable
+    container_name: stb-manager
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - ./stb-manager-bin:/app
+      - ./ota:/opt/ota
+    environment:
+      - MQTT_BROKER=tcp://127.0.0.1:1883
+      - MQTT_USER=gk-admin
+      - MQTT_PASS=gk-stb-2024
+      - HTTP_PORT=8080
+      - OTA_PORT=9080
+      - OTA_DIR=/opt/ota
+    command:
+      - /bin/sh
+      - -c
+      - /app/stb-manager

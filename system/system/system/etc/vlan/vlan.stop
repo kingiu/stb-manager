@@ -1,0 +1,29 @@
+#!/system/bin/sh
+
+#for debug print
+#CONSOLEDEV=/dev/console
+
+IFACE=eth0
+ID=85
+MACVLAN="mv"
+NEED_RELEASE=false
+
+IFACE=`getprop persist.ethernet.vlan.iface`
+ID=`getprop persist.ethernet.vlan.id`
+NEED_RELEASE=`getprop persist.ethernet.vlan.needrelease`
+
+echo "vlan stop with iface = $IFACE, id = $ID, needrelease = $NEED_RELEASE"
+
+#release may taking long time, if $NEED_RELEASE is false, don't release
+if [ -f "/data/misc/dhcp/dhclient6_vlan.leases" -a "X$NEED_RELEASE" != "Xfalse" ];then
+    echo "do release …… " > $CONSOLEDEV
+    /system/bin/dhclient -6 -r -d $IFACE.$ID -lf /data/misc/dhcp/dhclient6_vlan.leases
+fi
+
+result=$(echo $ID | grep $MACVLAN)
+if [[ $result != "" ]];
+then
+    ip link delete $IFACE.$ID
+else
+    busybox vconfig rem $IFACE.$ID
+fi

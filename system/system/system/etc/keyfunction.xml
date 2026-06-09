@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Applications>
+	<key>
+		<keyName>KEYCODE_M</keyName>
+		<keyValue>500</keyValue>
+		<packageName>com.github.mytv.android</packageName>
+		<activityName>top.yogiczy.mytv.tv.MainActivity</activityName>
+		<action>android.intent.action.VIEW</action>
+	</key>
+	<key>
+		<keyName>HomePage</keyName>
+		<keyValue>3</keyValue>
+		<packageName>cloudtv.com</packageName>
+		<activityName>cloudtv.com/com.github.tvbox.osc.ui.activity.JiuZmActivity</activityName>
+		<action>android.intent.action.MAIN</action>
+	</key>
+	<key>
+		<keyName>Settings</keyName>
+		<keyValue>176</keyValue>
+		<packageName>net.sunniwell.app.swsettings</packageName>
+		<activityName>net.sunniwell.app.swsettings.Settings</activityName>
+		<action>android.intent.action.MAIN</action>
+	</key>
+</Applications>

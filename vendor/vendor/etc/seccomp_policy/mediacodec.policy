@@ -1,0 +1,4 @@
+# see frameworks/av/services/mediacodec/seccomp_policy/mediacodec-arm.policy
+# for more details
+
+pselect6: 1

@@ -1,0 +1,4 @@
+service swRootService /vendor/bin/swRootService
+    class main
+    user root
+	seclabel u:r:swRootService:s0

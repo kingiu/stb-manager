@@ -87,6 +87,9 @@ var (
 //go:embed index.html
 var htmlPage []byte
 
+// htmlPath is the fallback path for reading index.html at runtime
+var htmlPath = "/app/index.html"
+
 func initTemplates() {
 	// Register a function for date formatting
 	funcMap := template.FuncMap{
@@ -119,7 +122,16 @@ func initTemplates() {
 			return `<span class="badge offline">离线</span>`
 		},
 	}
-	tmpl = template.Must(template.New("page").Funcs(funcMap).Parse(string(htmlPage)))
+	// Try embedded HTML first, fall back to file if embed is empty
+	htmlData := htmlPage
+	if len(htmlData) == 0 {
+		data, err := os.ReadFile(htmlPath)
+		if err != nil {
+			log.Fatalf("Failed to read index.html from %s: %v", htmlPath, err)
+		}
+		htmlData = data
+	}
+	tmpl = template.Must(template.New("page").Funcs(funcMap).Parse(string(htmlData)))
 }
 
 // ============ Handlers ============

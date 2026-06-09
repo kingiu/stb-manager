@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   stb-manager:
     image: ghcr.io/kingiu/stb-manager/stb-manager:latest
@@ -16,8 +14,3 @@ services:
       - OTA_DIR=/opt/ota
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-    deploy:
-      update_config:
-        parallelism: 1
-        delay: 10s
-        order: start-first

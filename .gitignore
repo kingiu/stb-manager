@@ -1,0 +1,20 @@
+# Binary files
+agent/gk-agent
+agent/gk-agent-arm
+agent/..agent*
+server/stb-manager
+server/stb-manager-linux-amd64
+server/stb-manager-x86_64
+server/..server*
+
+# OTA files
+ota/
+
+# Mosquitto data
+server/data/
+server/log/
+server/passwd
+
+# OS files
+.DS_Store
+Thumbs.db

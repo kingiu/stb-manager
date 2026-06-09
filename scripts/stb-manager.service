@@ -1,0 +1,20 @@
+[Unit]
+Description=GK STB Manager - Remote Management + OTA Server
+After=network.target
+Wants=mosquitto.service
+
+[Service]
+Type=simple
+ExecStart=/opt/stb-manager/stb-manager
+Restart=on-failure
+RestartSec=5
+Environment=MQTT_BROKER=tcp://localhost:1883
+Environment=MQTT_USER=admin
+Environment=MQTT_PASS=admin@manager
+Environment=HTTP_PORT=8080
+Environment=OTA_PORT=8081
+Environment=OTA_DIR=/opt/ota
+EnvironmentFile=-/opt/stb-manager/.env
+
+[Install]
+WantedBy=multi-user.target

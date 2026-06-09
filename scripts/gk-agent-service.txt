@@ -1,0 +1,23 @@
+#!/system/bin/sh
+# gk-agent init service definition
+# Add this to system/system/init.rc
+#
+# Add BEFORE the existing "on boot" section or inside it:
+#
+# service gk-agent /system/bin/gk-agent
+#     class main
+#     user root
+#     group root
+#     disabled
+#     oneshot
+#
+# Then enable it by removing "disabled" or via property:
+# on property:sys.agent.enable=1
+#     start gk-agent
+
+# Alternative: register as a standard service (unconditional start)
+# service gk-agent /system/bin/gk-agent
+#     class main
+#     user root
+#     group root net_bt_admin
+#     oneshot

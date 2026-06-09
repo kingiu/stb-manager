@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2.0
+    container_name: mosquitto
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - ./acl.conf:/mosquitto/config/acl.conf:ro
+      - ./passwd:/mosquitto/config/passwd
+      - ./data:/mosquitto/data
+      - ./log:/mosquitto/log
+    restart: unless-stopped
+    command: mosquitto -c /mosquitto/config/mosquitto.conf
+
+  stb-manager:
+    image: busybox:stable
+    container_name: stb-manager
+    network_mode: host
+    volumes:
+      - ./stb-manager-bin:/app
+      - ./ota:/opt/ota
+    environment:
+      - MQTT_BROKER=tcp://127.0.0.1:1883
+      - MQTT_USER=admin
+      - MQTT_PASS=admin@manager
+      - HTTP_PORT=8080
+      - OTA_DIR=/opt/ota
+    restart: unless-stopped
+    command:
+      - /bin/sh
+      - -c
+      - /app/stb-manager

@@ -137,7 +137,22 @@ func initTemplates() {
 // ============ Handlers ============
 
 func serveIndex(w http.ResponseWriter, r *http.Request) {
-	_ = tmpl.Execute(w, nil)
+	log.Printf("serveIndex called, tmpl=%p", tmpl)
+	if tmpl != nil {
+		if err := tmpl.Execute(w, nil); err != nil {
+			log.Printf("template execute error: %v", err)
+			http.Error(w, err.Error(), 500)
+		}
+	} else {
+		// Fallback: write raw embed
+		if len(htmlPage) > 0 {
+			w.Header().Set("Content-Type", "text/html; charset=utf-8")
+			w.Write(htmlPage)
+		} else {
+			w.WriteHeader(500)
+			w.Write([]byte("template not initialized"))
+		}
+	}
 }
 
 func apiDevices(w http.ResponseWriter, r *http.Request) {

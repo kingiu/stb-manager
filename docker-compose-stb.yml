@@ -1,10 +1,11 @@
 services:
   stb-manager:
-    image: ghcr.io/kingiu/stb-manager/stb-manager:latest
+    image: alpine:3.20
     container_name: stb-manager
     restart: unless-stopped
     network_mode: host
     volumes:
+      - ./stb-manager:/usr/local/bin/stb-manager
       - ./ota:/opt/ota
     environment:
       - MQTT_BROKER=tcp://127.0.0.1:1883
@@ -12,5 +13,6 @@ services:
       - MQTT_PASS=gk-stb-2024
       - HTTP_PORT=8080
       - OTA_DIR=/opt/ota
+    command: ["/usr/local/bin/stb-manager"]
     labels:
       - "com.centurylinklabs.watchtower.enable=true"

@@ -16,11 +16,10 @@ services:
     command: mosquitto -c /mosquitto/config/mosquitto.conf
 
   stb-manager:
-    image: busybox:stable
+    image: ghcr.io/kingiu/stb-manager/stb-manager:latest
     container_name: stb-manager
     network_mode: host
     volumes:
-      - ./stb-manager-bin:/app
       - ./ota:/opt/ota
     environment:
       - MQTT_BROKER=tcp://127.0.0.1:1883
@@ -29,7 +28,10 @@ services:
       - HTTP_PORT=8080
       - OTA_DIR=/opt/ota
     restart: unless-stopped
-    command:
-      - /bin/sh
-      - -c
-      - /app/stb-manager
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    deploy:
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: start-first

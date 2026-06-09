@@ -5,7 +5,9 @@ import (
 	_ "embed"
 	"encoding/json"
 	"fmt"
-	"html/template"
+	"text/template"
+
+	texttemplate "text/template"
 	"io"
 	"log"
 	"net/http"
@@ -131,7 +133,9 @@ func initTemplates() {
 		}
 		htmlData = data
 	}
-	tmpl = template.Must(template.New("page").Funcs(funcMap).Parse(string(htmlData)))
+	// Use text/template to avoid html/template strict JS context validation
+	// which fails on complex single-page app JavaScript
+	tmpl = texttemplate.Must(texttemplate.New("page").Funcs(funcMap).Parse(string(htmlData)))
 }
 
 // ============ Handlers ============

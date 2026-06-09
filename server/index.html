@@ -430,6 +430,7 @@ tr:hover { background: #fafafa; }
 const CRED_KEY = 'gk_stb_creds';
 
 function doLogin() {
+    console.log('doLogin called');
     const user = document.getElementById('loginUser').value;
     const pass = document.getElementById('loginPass').value;
     if (!user || !pass) { showLoginError('请输入用户名和密码'); return; }
@@ -714,14 +715,15 @@ function buildAgentConfigScript(envVars) {
         '> /etc/gk-agent.conf',
     ];
     for (const [k, v] of Object.entries(envVars)) {
-        lines.push(`echo "${k}=${v}" >> /etc/gk-agent.conf`);
+        lines.push('echo "' + k + '=' + v + '" >> /etc/gk-agent.conf');
     }
     // Also try to update the init.rc service definition
     lines.push('# Update init.rc if it exists');
     lines.push('RCFILE=/system/system/etc/init/gk-agent.rc');
     lines.push('if [ -f "$RCFILE" ]; then');
-    lines.push('    for env in ' + Object.keys(envVars).join(' ') + '; do');
-    lines.push('        VALUE="${' + '$' + env}"');
+    const envKeys = Object.keys(envVars).join(' ');
+    lines.push('    for env in ' + envKeys + '; do');
+    lines.push('        VALUE="${$env}"');
     lines.push('        if grep -q "^    environment ${env}=" "$RCFILE" 2>/dev/null; then');
     lines.push('            sed -i "s|^    environment ${env}=.*|    environment ${env}=${VALUE}|" "$RCFILE"');
     lines.push('        else');

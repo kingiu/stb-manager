@@ -558,7 +558,7 @@ func reportResult(client mqtt.Client, commandID, status, message string, payload
 
 func sendResponse(client mqtt.Client, resp Response) {
 	data, _ := json.Marshal(resp)
-	topic := fmt.Sprintf("devices/%s/ota/result", config.Serial)
+	topic := fmt.Sprintf("devices/%s/%s/result", config.Serial, resp.Type)
 	client.Publish(topic, 1, false, data)
 	log.Printf("Sent response: %s", string(data))
 }

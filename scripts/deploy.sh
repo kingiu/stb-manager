@@ -2,7 +2,7 @@
 # deploy.sh - Deploy gk-agent to the ROM
 # Usage: ./deploy.sh
 
-AGENT="remote-manager/agent/gk-agent-arm"
+AGENT="agent/gk-agent-arm"
 ROM_DIR="system"
 
 if [ ! -f "$AGENT" ]; then
